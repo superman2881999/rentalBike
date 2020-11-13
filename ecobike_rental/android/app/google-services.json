@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "846510957408",
+    "firebase_url": "https://rentalbike-62ea8.firebaseio.com",
+    "project_id": "rentalbike-62ea8",
+    "storage_bucket": "rentalbike-62ea8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846510957408:android:9836fec094e8c6df4eb405",
+        "android_client_info": {
+          "package_name": "com.example.ecobike_rental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846510957408-e6nua0mlncr9qk92gnkhbumcgobpejb0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecobike_rental",
+            "certificate_hash": "9366f9b7694ef8130b49e83c7095d300e3ee774a"
+          }
+        },
+        {
+          "client_id": "846510957408-rl5flamm1cublft1m9roqiaemm0schac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5Hk7wok2nazEL9epG5j6H8L2qIe6tvF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846510957408-rl5flamm1cublft1m9roqiaemm0schac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

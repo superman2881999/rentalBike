@@ -1,0 +1,88 @@
+{
+  "bikes" : {
+    "bike1" : {
+      "bikeId" : 1,
+      "codeBike" : "123 3243 3244 232",
+      "deposit" : "400,000",
+      "nameBike" : "Xe đạp mini Nhật",
+      "parkingId" : 1,
+      "state" : "SanSang",
+      "typeBike" : "XeDap"
+    },
+    "bike2" : {
+      "batteryCapacity" : 70,
+      "bikeId" : 2,
+      "codeBike" : "123 2432 34 242 33",
+      "deposit" : "700,000",
+      "licensePlate" : "29A2-13671",
+      "nameBike" : "Xe đạp điện X-men",
+      "parkingId" : 2,
+      "state" : "ChuaSanSang",
+      "typeBike" : "XeDapDien"
+    },
+    "bike3" : {
+      "bikeId" : 3,
+      "codeBike" : "232 34 2 83 7323",
+      "deposit" : "550,000",
+      "nameBike" : "Xe đạp đôi Nhật",
+      "parkingId" : 2,
+      "state" : "SanSang",
+      "typeBike" : "XeDapDoi"
+    }
+  },
+  "creditCards" : {
+    "creditCard1" : {
+      "amountMoney" : "1,000,000",
+      "appCode" : "CWr2Fkgfdgdf=",
+      "cardId" : 1,
+      "codeCard" : "12343 32432 32432",
+      "cvvCode" : 101,
+      "dateExpired" : "12/12/2020 00:00:00",
+      "secretKey" : "BLSSBlfewdgf=",
+      "userId" : 1
+    }
+  },
+  "notification" : {
+    "notification1" : {
+      "bikeId" : 2,
+      "description" : "Bãi số 1 - Mã xe: 123 3243 3244 232",
+      "nameNotification" : "Trả xe đạp thành công",
+      "notificationId" : 1,
+      "parkingId" : 1,
+      "time" : "5 phút trước",
+      "userId" : 1
+    }
+  },
+  "parkings" : {
+    "parking1" : {
+      "amountBike" : 12,
+      "description" : "Cách bạn 1 km",
+      "nameParking" : "Bãi số 1",
+      "parkingId" : 1
+    },
+    "parking2" : {
+      "amountBike" : 10,
+      "description" : "Cách bạn 2 km",
+      "nameParking" : "Bãi số 2",
+      "parkingId" : 2
+    }
+  },
+  "transactionHistorys" : {
+    "transactionHistory1" : {
+      "bikeId" : 2,
+      "cardId" : 1,
+      "dateRentBike" : "11/15/2020 00:00:00",
+      "paymentMoney" : "70,000",
+      "timeRentBike" : "1h30p",
+      "transactionId" : 1,
+      "transactionName" : "Thuê xe đi Bách Khoa"
+    }
+  },
+  "users" : {
+    "user1" : {
+      "gmail" : "killteammate@gmail.com",
+      "nameUser" : "DungLe",
+      "userId" : 1
+    }
+  }
+}

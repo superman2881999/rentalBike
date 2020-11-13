@@ -44,7 +44,7 @@ class _BikeDetailState extends State<BikeDetail> {
     super.initState();
   }
   Future<LatLng> getUserLocation() async {
-    Geolocator.getCurrentPosition().then((currloc) {
+   await Geolocator.getCurrentPosition().then((currloc) {
       setState(() {
         currentLocation = currloc;
       });
