@@ -1,8 +1,7 @@
-import 'package:EcobikeRental/login.dart';
-import 'package:EcobikeRental/register.dart';
 import 'package:flutter/material.dart';
 
 import 'login.dart';
+import 'register.dart';
 
 class Authentication extends StatefulWidget {
   @override

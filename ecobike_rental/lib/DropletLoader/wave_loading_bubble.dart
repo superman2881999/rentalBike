@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'WaveLoadingBubblePainter.dart';
+import 'wave_loading_bubble_painter.dart';
 
 class WaveLoadingBubble extends StatelessWidget {
   const WaveLoadingBubble({

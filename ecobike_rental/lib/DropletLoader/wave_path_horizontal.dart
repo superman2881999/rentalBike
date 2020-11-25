@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 class WavePathHorizontal {
   WavePathHorizontal({
@@ -10,31 +11,39 @@ class WavePathHorizontal {
     this.phaseShift = 0.0,
     this.doClosePath = false,
     this.crossAxisEndPoint = 0,
-  }) : assert(crossAxisEndPoint != null || doClosePath == false, "if doClosePath is true you must provide an end point (crossAxisEndPoint)");
+  }) : assert(crossAxisEndPoint != null || doClosePath == false,
+            "if doClosePath is true you must provide an end point "
+                "(crossAxisEndPoint)");
 
   final double width;
   final double amplitude;
   final double period;
   final Offset startPoint;
-  final double crossAxisEndPoint; //*
-  final double phaseShift; //* shift the starting value of the wave, in radians, repeats every 2 radians
+  final double crossAxisEndPoint;
+  final double phaseShift;
   final bool doClosePath;
 
   Path build() {
-    double startPointX = startPoint.dx;
-    double startPointY = startPoint.dy;
-    Path returnPath = new Path();
+    final startPointX = startPoint.dx;
+    final startPointY = startPoint.dy;
+    final returnPath = Path();
+    // ignore: cascade_invocations
     returnPath.moveTo(startPointX, startPointY);
 
-    for (double i = 0; i <= width; i++) {
+    for (var i = 0; i <= width; i++) {
       returnPath.lineTo(
         i + startPointX,
-        startPointY + amplitude * math.sin((i * 2 * period * math.pi / width) + phaseShift * math.pi),
+        startPointY +
+            amplitude *
+                math.sin(
+                    (i * 2 * period * math.pi / width) + phaseShift * math.pi),
       );
     }
     if (doClosePath == true) {
       returnPath.lineTo(startPointX + width, crossAxisEndPoint);
+      // ignore: cascade_invocations
       returnPath.lineTo(startPointX, crossAxisEndPoint);
+      // ignore: cascade_invocations
       returnPath.close();
     }
     return returnPath;

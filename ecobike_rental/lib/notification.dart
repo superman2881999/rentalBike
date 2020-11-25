@@ -1,100 +1,91 @@
-import 'package:EcobikeRental/widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'dart:math';
 
-class Notificationss extends StatefulWidget {
+import 'Model/notification_model.dart';
+import 'intro_app/splash_screen.dart';
+import 'widget.dart';
+
+class Notify extends StatefulWidget {
   @override
-  _NotificationssState createState() => _NotificationssState();
+  _NotifyState createState() => _NotifyState();
 }
 
-class _NotificationssState extends State<Notificationss> {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    var initializationSettingsAndroid =
-    new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
-    initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    super.initState();
-  }
+class _NotifyState extends State<Notify> {
+  List<NotificationModel> listNotification = SplashScreen.listNotification;
   @override
   Widget build(BuildContext context) {
-    List colors = [Colors.red, Colors.green, Colors.yellow,Colors.deepOrangeAccent,Colors.cyanAccent,Colors.red, Colors.green, Colors.yellow,Colors.deepOrangeAccent,Colors.cyanAccent];
     return Scaffold(
-        appBar: appBarNotification("Notification",context),
+        appBar: appBarNotification("Thông báo", context),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ListView.builder(itemCount:10,itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                _showNotificationWithDefaultSound();
-              },
-              child: Stack(
+          padding: const EdgeInsets.all(20),
+          child: ListView.builder(
+            itemCount: listNotification.length,
+            itemBuilder: (context, index) {
+              return Stack(
                 children: [
-                  Card(
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: 100,
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    child: ListTile(
-                      title: Text("Trả xe đạp thành công",style: simpleTextFieldStyle(Colors.black, 12.0),),
-                      subtitle: Text("Bãi 1 - Mã xe: 23657 456 4332",style: simpleTextFieldStyle(Colors.black26, 10.0)),
-                      trailing: Text("5 phút",style: simpleTextFieldStyle(Colors.black26, 10.0)),
+                      child: Center(
+                        child: ListTile(
+                          title: Text(
+                            listNotification[index].nameNotification,
+                            overflow: TextOverflow.ellipsis,
+                            style: simpleTextFieldStyle(Colors.black, 18),
+                          ),
+                          subtitle: Transform(
+                            transform: Matrix4.translationValues(0, 10, 0),
+                            child: Text(listNotification[index].description,
+                                style:
+                                    simpleTextFieldStyle(Colors.black45, 15)),
+                          ),
+                          trailing: Text(listNotification[index].time,
+                              style:
+                                  simpleTextFieldStyle(Colors.black45, 14)),
+                        ),
+                      ),
                     ),
                   ),
                   Positioned(
-                    left: 4.0,
-                    top: 22.0,
+                    left: 4,
+                    top: 22,
                     child: ClipPath(
-                      clipper: TopBackgrounfImageClipper(),
-                      child: Container(
-                        height: 35,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: colors[index],
-                      ),
-
-                    )),
+                        clipper: TopBackgrounfImageClipper(),
+                        child: Container(
+                          height: 55,
+                          width: 60,
+                          decoration: const BoxDecoration(
+                            color: Colors.redAccent,
+                          ),
+                        )),
                   )
                 ],
-              ),
-            );
-          },),
-        )
-      );
-  }
-  Future _showNotificationWithDefaultSound() async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'your channel id', 'your channel name', 'your channel description',
-        importance: Importance.Max, priority: Priority.High);
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'Trả xe đạp thành công',
-      'Bãi 1 - Mã xe: 23657 456 4332',
-      platformChannelSpecifics,
-      payload: 'Default_Sound',
-    );
+              );
+            },
+          ),
+        ));
   }
 }
+
 //custom lại clippath
 class TopBackgrounfImageClipper extends CustomClipper<Path> {
-
   @override
-  getClip(Size size) {
-    var controlPoint = Offset(size.width /4, size.height /2);
-    var endPoint = Offset(0, size.height);
-    var path = Path();
+  Path getClip(Size size) {
+    final controlPoint = Offset(size.width / 4, size.height / 2);
+    final endPoint = Offset(0, size.height);
+    final path = Path();
+    // ignore: cascade_invocations
     path.moveTo(0, 0);
+    // ignore: cascade_invocations
     path.lineTo(0, 0);
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx,endPoint.dy);
+    // ignore: cascade_invocations
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    // ignore: cascade_invocations
     path.close();
     return path;
   }
