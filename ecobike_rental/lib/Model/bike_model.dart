@@ -4,6 +4,7 @@ class BikeModel {
       this.state,
       this.nameBike,
       this.typeBike,
+        this.urlImage,
       this.batteryCapacity,
       this.bikeId,
       this.codeBike,
@@ -12,6 +13,7 @@ class BikeModel {
   int parkingId;
   int bikeId;
   String codeBike;
+  Map<dynamic,dynamic> urlImage;
   int deposit;
   String licensePlate;
   int batteryCapacity;

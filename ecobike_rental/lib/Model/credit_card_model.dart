@@ -6,7 +6,7 @@ class CreditCardModel {
       this.appCode,
       this.codeCard,
       this.cvvCode,
-      this.dateExprited,
+      this.dateExpired,
       this.secretKey});
 
   int amountMoney;
@@ -14,7 +14,7 @@ class CreditCardModel {
   int cardId;
   String codeCard;
   int cvvCode;
-  String dateExprited;
+  String dateExpired;
   String secretKey;
   int userId;
 
