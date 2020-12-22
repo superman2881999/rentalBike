@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// trả về màn hình slide
 class SliderPage extends StatelessWidget {
+  // Constructor chứa ảnh và miêu tả từng slide
   const SliderPage({this.description, this.image});
   final String description;
   final String image;
 
+  // Trả về widget màn hình slide
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

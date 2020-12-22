@@ -89,7 +89,8 @@ class _BikeDetailState extends State<BikeDetail> {
     });
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appBarMain(const Text("Thông tin chi tiết của xe"), context),
+      appBar:
+          Service.appBarMain(const Text("Thông tin chi tiết của xe"), context),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -108,8 +109,8 @@ class _BikeDetailState extends State<BikeDetail> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 8, left: 8),
                               child: Text("Danh sách màu xe",
-                                  style: especiallyTextFieldStyle(
-                                      Colors.redAccent, 18)),
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.redAccent, 18, FontWeight.bold)),
                             ),
                           ),
                           Expanded(
@@ -168,8 +169,8 @@ class _BikeDetailState extends State<BikeDetail> {
                       child: Column(
                         children: [
                           Text("Chi tiết sản phẩm",
-                              style: especiallyTextFieldStyle(
-                                  Colors.redAccent, 18)),
+                              style: Service.simpleTextFieldStyle(
+                                  Colors.redAccent, 18, FontWeight.bold)),
                           Padding(
                             padding: const EdgeInsets.all(8),
                             child: Column(
@@ -187,8 +188,11 @@ class _BikeDetailState extends State<BikeDetail> {
                                             : Text(
                                                 // ignore: lines_longer_than_80_chars
                                                 "Biển số xe: ${widget.bikeModel.licensePlate} ",
-                                                style: simpleTextFieldStyle(
-                                                    Colors.black, 16))),
+                                                style: Service
+                                                    .simpleTextFieldStyle(
+                                                        Colors.black,
+                                                        16,
+                                                        FontWeight.normal))),
                                     Expanded(
                                         child: widget.bikeModel
                                                     .batteryCapacity ==
@@ -198,20 +202,23 @@ class _BikeDetailState extends State<BikeDetail> {
                                             : Text(
                                                 // ignore: lines_longer_than_80_chars
                                                 "Lượng pin hiện tại: ${widget.bikeModel.batteryCapacity}% ",
-                                                style: simpleTextFieldStyle(
-                                                    Colors.black, 16)))
+                                                style: Service
+                                                    .simpleTextFieldStyle(
+                                                        Colors.black,
+                                                        16,
+                                                        FontWeight.normal)))
                                   ],
                                 ),
                                 const SizedBox(height: 10),
                                 Text("Mã xe: ${widget.bikeModel.codeBike} ",
-                                    style:
-                                        simpleTextFieldStyle(Colors.black, 16)),
+                                    style: Service.simpleTextFieldStyle(
+                                        Colors.black, 16, FontWeight.normal)),
                                 const SizedBox(height: 10),
                                 Text(
                                     "Cách tính tiền "
                                     "(Hoàn lại tiền cọc khi trả xe): ",
-                                    style: especiallyTextFieldStyle(
-                                        Colors.black, 16)),
+                                    style: Service.simpleTextFieldStyle(
+                                        Colors.black, 16, FontWeight.bold)),
                                 const SizedBox(height: 10),
                                 Container(
                                     decoration: BoxDecoration(
@@ -230,8 +237,11 @@ class _BikeDetailState extends State<BikeDetail> {
                                               "Nếu khách hàng dùng xe hơn "
                                               "10 phút thì tính tiền "
                                               "như sau: ",
-                                              style: simpleTextFieldStyle(
-                                                  Colors.black, 16)),
+                                              style:
+                                                  Service.simpleTextFieldStyle(
+                                                      Colors.black,
+                                                      16,
+                                                      FontWeight.normal)),
                                           const SizedBox(height: 10),
                                           Padding(
                                             padding:
@@ -239,8 +249,11 @@ class _BikeDetailState extends State<BikeDetail> {
                                             child: Text(
                                                 "+ Giá khởi điểm cho 30 phút"
                                                 " đầu là 10.000 đồng",
-                                                style: simpleTextFieldStyle(
-                                                    Colors.black, 16)),
+                                                style: Service
+                                                    .simpleTextFieldStyle(
+                                                        Colors.black,
+                                                        16,
+                                                        FontWeight.normal)),
                                           ),
                                           const SizedBox(height: 10),
                                           Padding(
@@ -250,8 +263,11 @@ class _BikeDetailState extends State<BikeDetail> {
                                                 "+ Cứ mỗi 15 phút tiếp theo, "
                                                 "khách sẽ phải trả thêm"
                                                 " 3.000 đồng",
-                                                style: simpleTextFieldStyle(
-                                                    Colors.black, 16)),
+                                                style: Service
+                                                    .simpleTextFieldStyle(
+                                                        Colors.black,
+                                                        16,
+                                                        FontWeight.normal)),
                                           ),
                                         ],
                                       ),
@@ -278,7 +294,8 @@ class _BikeDetailState extends State<BikeDetail> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       "Tổng tiền phải cọc: ${widget.bikeModel.deposit} Đ",
-                      style: simpleTextFieldStyle(Colors.redAccent, 15),
+                      style: Service.simpleTextFieldStyle(
+                          Colors.redAccent, 15, FontWeight.normal),
                     ),
                   ),
                 ),
@@ -287,7 +304,7 @@ class _BikeDetailState extends State<BikeDetail> {
                   child: GestureDetector(
                     onTap: () {
                       if (widget.bikeModel.state == "Sẵn Sàng") {
-                        alertDialogRentBike(
+                        Service.alertDialogRentBike(
                             context,
                             _stopWatchTimer,
                             location,
@@ -298,7 +315,7 @@ class _BikeDetailState extends State<BikeDetail> {
                             codeBike,
                             formKey);
                       } else if (widget.bikeModel.state == "Chưa Sẵn Sàng") {
-                        alertDialogNotiStateBike(
+                        Service.alertDialogNotiStateBike(
                             context,
                             // ignore: lines_longer_than_80_chars
                             "Xe này đã được thuê, quý khách vui lòng chọn xe khác.");
@@ -320,7 +337,8 @@ class _BikeDetailState extends State<BikeDetail> {
                               ])),
                       child: Text(
                         "Thuê xe",
-                        style: simpleTextFieldStyle(Colors.white, 15),
+                        style: Service.simpleTextFieldStyle(
+                            Colors.white, 15, FontWeight.normal),
                       ),
                     ),
                   ),

@@ -39,6 +39,7 @@ dependencies:
   crypto: ^2.1.5
   http: ^0.12.2
   shared_preferences: ^0.5.12+4
+  test: ^1.15.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -83,6 +84,8 @@ flutter:
      - images/iconChip.png
      - images/cardInfo.png
      - images/logoCard.png
+     - images/no.png
+     - images/icons8-payment-history-100.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

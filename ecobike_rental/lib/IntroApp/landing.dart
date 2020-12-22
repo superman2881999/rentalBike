@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import '../authentication/authentication.dart';
 import 'slider_page.dart';
 
+///Lớp này để giới thiệu về tiêu chí app của chúng tôi
+/// @return: Trả về instance của class _LandingState extend từ State<>
 class Landing extends StatefulWidget {
+  //Trả về instance của class _LandingState extend từ State<>
   @override
   _LandingState createState() => _LandingState();
 }
-
+///Hiển thị các màn hình dạng slide
 class _LandingState extends State<Landing> {
   int _currentPage = 0;
   final PageController _controller = PageController();
-
+  // List chứa slide
   final List<Widget> _pages = [
     const SliderPage(
         description: "Chào mừng bạn đến với thế giới xe của chúng tôi",
@@ -24,13 +27,13 @@ class _LandingState extends State<Landing> {
         description: "Cùng khám phá dịch vụ thuê xe của chúng tôi nhé !!!",
         image: "images/xedapdienxanh.jpg"),
   ];
-
+  // hàm cập nhật slide hiện tại đang dừng
   void _onchanged(int index) {
     setState(() {
       _currentPage = index;
     });
   }
-
+  //trả về giao diện slide page
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,19 +3,31 @@ import 'package:flutter/material.dart';
 
 import '../IntroApp/splash_screen.dart';
 import '../Model/notification_model.dart';
+import 'custom_clip_path.dart';
 import 'widget.dart';
 
+///Trả về 1 instance _NotifyState
 class Notify extends StatefulWidget {
   @override
   _NotifyState createState() => _NotifyState();
 }
 
+///Trả về giao diện hiển thị danh sách thông báo
 class _NotifyState extends State<Notify> {
-  List<NotificationModel> listNotification = SplashScreen.listNotification;
+  //Khai báo biến chứa danh sách thông báo
+  List<NotificationModel> listNotification;
+  //Khởi tạo màn hình hiển thị danh sách thông báo
+  @override
+  void initState() {
+    listNotification = SplashScreen.listNotification;
+    super.initState();
+  }
+
+  //Trả về giao diện hiển thị danh sách thông báo
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBarNotification("Thông báo", context),
+        appBar: Service.appBarNotification("Thông báo", context),
         body: listNotification.isEmpty
             ? const Center(child: Text("Không có thông báo nào"))
             : Padding(
@@ -39,7 +51,8 @@ class _NotifyState extends State<Notify> {
                                           listNotification.length - index - 1]
                                       .nameNotification,
                                   overflow: TextOverflow.ellipsis,
-                                  style: simpleTextFieldStyle(Colors.black, 18),
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.black, 18, FontWeight.normal),
                                 ),
                                 subtitle: Transform(
                                   transform:
@@ -49,15 +62,17 @@ class _NotifyState extends State<Notify> {
                                               index -
                                               1]
                                           .description,
-                                      style: simpleTextFieldStyle(
-                                          Colors.black45, 15)),
+                                      style: Service.simpleTextFieldStyle(
+                                          Colors.black45,
+                                          15,
+                                          FontWeight.normal)),
                                 ),
                                 trailing: Text(
                                     listNotification[
                                             listNotification.length - index - 1]
                                         .time,
-                                    style: simpleTextFieldStyle(
-                                        Colors.black45, 14)),
+                                    style: Service.simpleTextFieldStyle(
+                                        Colors.black45, 14, FontWeight.normal)),
                               ),
                             ),
                           ),
@@ -66,7 +81,7 @@ class _NotifyState extends State<Notify> {
                           left: 4,
                           top: 22,
                           child: ClipPath(
-                              clipper: TopBackgrounfImageClipper(),
+                              clipper: CustomClipPath(),
                               child: Container(
                                 height: 55,
                                 width: 60,
@@ -80,30 +95,5 @@ class _NotifyState extends State<Notify> {
                   },
                 ),
               ));
-  }
-}
-
-//custom lại clippath
-class TopBackgrounfImageClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final controlPoint = Offset(size.width / 4, size.height / 2);
-    final endPoint = Offset(0, size.height);
-    final path = Path();
-    // ignore: cascade_invocations
-    path.moveTo(0, 0);
-    // ignore: cascade_invocations
-    path.lineTo(0, 0);
-    // ignore: cascade_invocations
-    path.quadraticBezierTo(
-        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
-    // ignore: cascade_invocations
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper oldClipper) {
-    return false;
   }
 }

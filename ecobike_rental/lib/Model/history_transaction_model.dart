@@ -1,3 +1,4 @@
+///Lớp model chứa thông tin lịch sử giao dịch
 class HistoryTransaction {
   HistoryTransaction({
     this.userId,

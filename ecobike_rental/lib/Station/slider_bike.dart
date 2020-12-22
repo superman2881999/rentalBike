@@ -2,24 +2,31 @@ import 'package:flutter/material.dart';
 
 import '../IntroApp/splash_screen.dart';
 import '../Model/bike_model.dart';
-import '../RentBike/bike_detail.dart';
 import '../Service/widget.dart';
 import '../service/database.dart';
 
+///Trả về 1 instance của _SliderBikeState
 class SliderBike extends StatefulWidget {
+  //Constructor nhận đầu vào là id bãi xe và tên bãi xe
   const SliderBike({Key key, this.parkingId, this.nameParking})
       : super(key: key);
   final String nameParking;
   final int parkingId;
+  //Trả về 1 instance của _SliderBikeState
   @override
   _SliderBikeState createState() => _SliderBikeState();
 }
 
+///Trả về giao diện list các xe loại xe đạp có id bãi xe và tên bãi xe như trên
 class _SliderBikeState extends State<SliderBike> {
+  //Khởi tạo biến chứa danh sách các xe đạp
   List<BikeModel> listSingleBike = SplashScreen.listSingleBike;
+  //Khai báo biến chứa danh sách xe đạp theo id bãi xe
   List<BikeModel> listSingleBikeById = [];
+  //Hàm khởi tạo sẽ được chạy khi class được gọi đến
   @override
   void initState() {
+    // Lấy ra danh sách xe và add vào List listSingleBikeById ở trên từ server
     DatabaseService.getListBike().then((value) {
       SplashScreen.listSingleBike.clear();
       value.once().then((snapshot) {
@@ -42,6 +49,7 @@ class _SliderBikeState extends State<SliderBike> {
         });
       });
     });
+    // Lọc ra những xe có id trùng với id của bãi xe
     for (var i = 0; i < listSingleBike.length; i++) {
       if (listSingleBike[i].parkingId == widget.parkingId) {
         listSingleBikeById.add(listSingleBike[i]);
@@ -50,66 +58,9 @@ class _SliderBikeState extends State<SliderBike> {
     super.initState();
   }
 
+  //Hiển thị danh sách xe đạp cho người dùng tương tác
   @override
   Widget build(BuildContext context) {
-    return listSingleBikeById.isEmpty
-        ? const Center(
-            child: Text("Không có xe sẵn cho bạn"),
-          )
-        : ListView.builder(
-            itemCount: listSingleBikeById.length,
-            itemExtent: 350,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Card(
-                  elevation: 10,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
-                        leading: Image.network(
-                            listSingleBikeById[index]
-                                .urlImage["urlImage${index+1}"],
-                            height: 30,
-                            width: 30,
-                            fit: BoxFit.fill),
-                        title: Text(listSingleBikeById[index].nameBike,
-                            style: simpleTextFieldStyle(Colors.black, 15)),
-                        subtitle: Text(
-                          listSingleBikeById[index].state,
-                          style: simpleTextFieldStyle(Colors.black26, 13),
-                        ),
-                      ),
-                      const Divider(
-                        indent: 10,
-                        endIndent: 10,
-                        color: Colors.grey,
-                      ),
-                      Expanded(
-                          child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => BikeDetail(
-                                    bikeModel: listSingleBikeById[index],
-                                    nameParking: widget.nameParking,
-                                  ),
-                                ));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Image.network(
-                                    listSingleBikeById[index]
-                                        .urlImage["urlImage${index+1}"],
-                                    fit: BoxFit.fill,
-                                    width: MediaQuery.of(context).size.width),
-                              ))),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+    return Service.listBike(listSingleBikeById, widget.nameParking);
   }
 }

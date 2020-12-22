@@ -1,3 +1,4 @@
+///Lớp model chứa thông tin của thẻ tín dụng
 class CreditCardModel {
   CreditCardModel(
       {this.cardId,
@@ -17,6 +18,4 @@ class CreditCardModel {
   String dateExpired;
   String secretKey;
   int userId;
-
-
 }

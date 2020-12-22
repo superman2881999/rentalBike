@@ -5,15 +5,19 @@ import 'package:flutter/services.dart';
 
 import 'IntroApp/splash_screen.dart';
 
+/// Khi chạy project thì đầu tiên sẽ chạy vào hàm main()
 // ignore: avoid_void_async
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  // bắt buộc thêm đoạn code sau trước khi chạy bất kỳ dịch vụ nào của Google.
   await Firebase.initializeApp();
+  // Chạy project
   runApp(MyApp());
 }
-
+/// Lớp chứa widget gốc của app của bạn
+/// @return: trả về 1 widget gốc và chạy vào màn hình splash screen
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // Đây là widget gốc của app của bạn.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

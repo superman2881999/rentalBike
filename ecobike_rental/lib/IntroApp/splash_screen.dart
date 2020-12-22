@@ -14,8 +14,13 @@ import '../Model/parking_model.dart';
 import '../service/database.dart';
 import 'landing.dart';
 
+/// Lớp này sẽ hiện màn hình splash screen để đợi load data của app
+/// @return: Trả về instance của class _SplashScreenState extend từ State<>
+
 class SplashScreen extends StatefulWidget {
+  //Biến lưu vị trí hiện tại của người dùng
   static Position currentLocation;
+  //Khai báo các biến để lưu trữ list dữ liệu trả về từ server
   static List<ParkingModel> listParking = [];
   static List<BikeModel> listSingleBike = [];
   static List<BikeModel> listDoubleBike = [];
@@ -23,14 +28,18 @@ class SplashScreen extends StatefulWidget {
   static List<NotificationModel> listNotification = [];
   static List<HistoryTransaction> listHistoryTransaction = [];
   static List<Map<int, bool>> listIsCheck = [];
+  //Biến lưu giá trị của thẻ tín dụng
   static CreditCardModel creditCardModelInfo;
   static int totalMoney;
   static String totalTime;
+  //Trả về instance của class _SplashScreenState extend từ State<>
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
+///Trả về kết quả lấy được từ server vào các biến đã khai báo ở class trên
 class _SplashScreenState extends State<SplashScreen> {
+  //Trả về vị trí của người dùng
   // ignore: missing_return
   static Future<LatLng> getUserLocation() async {
     await Geolocator.getCurrentPosition().then((currloc) {
@@ -38,8 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  // Trả về các list data từ server
   void getData() {
-    // lấy danh sách bãi xe
+    // Lấy danh sách bãi xe
     DatabaseService.getListParking().then((value) {
       SplashScreen.listParking.clear();
       value.once().then((snapshot) {
@@ -51,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
         });
       });
     });
-    // lấy thông tin thẻ
+    // Lấy thông tin thẻ
     DatabaseService.getCard(1).then((value) {
       value.once().then((snapshot) {
         final Map<dynamic, dynamic> values = snapshot.value;
@@ -66,16 +76,16 @@ class _SplashScreenState extends State<SplashScreen> {
             secretKey: values["secretKey"]);
       });
     });
-    // lấy danh sách thông báo
+    // Lấy danh sách thông báo
     DatabaseService.getListNotification();
-    // lấy total time và total money
+    // Lấy total time và total money
     DatabaseService.getTotalMoneyAndTime().then((value) {
       value.once().then((snapshot) {
         SplashScreen.totalMoney = snapshot.value["totalMoney"];
         SplashScreen.totalTime = snapshot.value["totalTime"];
       });
     });
-    // lấy danh sách giao dịch thuê xe
+    // Lấy danh sách giao dịch thuê xe
     DatabaseService.getListHistoryTransaction().then((v) {
       SplashScreen.listHistoryTransaction.clear();
       SplashScreen.listIsCheck.clear();
@@ -98,7 +108,7 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       });
     });
-    // lấy danh sách xe trong bãi
+    // Lấy danh sách xe trong bãi
     DatabaseService.getListBike().then((value) {
       SplashScreen.listSingleBike.clear();
       SplashScreen.listElectricBike.clear();
@@ -147,17 +157,20 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  //Hàm khởi tạo chạy khi class đc tạo
   @override
   void initState() {
     super.initState();
     _SplashScreenState.getUserLocation();
     getData();
+    //Sau 10 giây thì sẽ chuyển hướng vào màn hình giới thiệu app
     Timer(
         const Duration(seconds: 10),
         () => Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => Landing())));
   }
 
+  //Hàm build trả về giao diện của màn hình
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,7 +183,7 @@ class _SplashScreenState extends State<SplashScreen> {
             AutomatedAnimator(
               animateToggle: true,
               doRepeatAnimation: true,
-              duration: const Duration(seconds: 10),
+              duration: const Duration(seconds: 7),
               buildWidget: (animationPosition) {
                 return WaveLoadingBubble(
                   foregroundWaveColor: Colors.redAccent,

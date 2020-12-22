@@ -50,10 +50,10 @@ class _RegisterState extends State<Register> {
                                         : null;
                                   },
                                   //controller: userName,
-                                  style:
-                                      simpleTextFieldStyle(Colors.black26, 16),
-                                  decoration:
-                                      textFieldInputDecoration("UserName")),
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.black26, 16, FontWeight.normal),
+                                  decoration: Service.textFieldInputDecoration(
+                                      "UserName")),
                             ),
                             Container(
                               padding: const EdgeInsets.only(
@@ -67,10 +67,10 @@ class _RegisterState extends State<Register> {
                                         : "Please provide a valid email";
                                   },
                                   // controller: emailUser,
-                                  style:
-                                      simpleTextFieldStyle(Colors.black26, 16),
-                                  decoration:
-                                      textFieldInputDecoration("Email")),
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.black26, 16, FontWeight.normal),
+                                  decoration: Service.textFieldInputDecoration(
+                                      "Email")),
                             ),
                             Container(
                               padding: const EdgeInsets.only(
@@ -84,10 +84,10 @@ class _RegisterState extends State<Register> {
                                             "6+ characters";
                                   },
                                   // controller: passWordUser,
-                                  style:
-                                      simpleTextFieldStyle(Colors.black26, 16),
-                                  decoration:
-                                      textFieldInputDecoration("Password")),
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.black26, 16, FontWeight.normal),
+                                  decoration: Service.textFieldInputDecoration(
+                                      "Password")),
                             )
                           ],
                         ),
@@ -115,7 +115,8 @@ class _RegisterState extends State<Register> {
                                   Color(0xFFEF5350),
                                 ])),
                         child: Text("Register",
-                            style: simpleTextFieldStyle(Colors.white, 17)),
+                            style:Service.simpleTextFieldStyle(
+                                Colors.white, 17, FontWeight.normal)),
                       ),
                       Expanded(
                         child: Container(
@@ -140,7 +141,8 @@ class _RegisterState extends State<Register> {
                       children: [
                         Text(
                           "Do you have account?",
-                          style: simpleTextFieldStyle(Colors.black54, 12),
+                          style: Service.simpleTextFieldStyle(
+                              Colors.black54, 12, FontWeight.normal),
                         ),
                         Expanded(
                           child: GestureDetector(
@@ -151,8 +153,10 @@ class _RegisterState extends State<Register> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8),
                                 child: Text(" Login now",
-                                    style: simpleTextFieldStyle(
-                                        const Color(0xFFEF5350), 13))),
+                                    style: Service.simpleTextFieldStyle(
+                                        const Color(0xFFEF5350),
+                                        13,
+                                        FontWeight.normal))),
                           ),
                         ),
                       ],

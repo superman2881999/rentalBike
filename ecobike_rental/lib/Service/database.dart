@@ -1,23 +1,23 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../IntroApp/splash_screen.dart';
 import '../Model/notification_model.dart';
 
+//Lớp quản lý truy vấn thêm,sửa,xóa dữ liệu trên database Firebase
+// ignore: avoid_classes_with_only_static_members
 class DatabaseService {
+  //Khởi tạo biến lưu instance của FirebaseDatabase
   static DatabaseReference databaseReference =
       FirebaseDatabase.instance.reference();
-
+  //Truy vấn lấy ra danh sách bãi xe
   static Future<Query> getListParking() async {
     return databaseReference.child("parkings");
   }
-
+  //Truy vấn lấy ra danh sách xe có sẵn
   static Future<Query> getListBike() async {
     return databaseReference.child("bikes");
   }
-
+  //Truy vấn lấy ra danh sách thông báo
   static Future<dynamic> getListNotification() async {
     SplashScreen.listNotification.clear();
     return databaseReference
@@ -35,57 +35,47 @@ class DatabaseService {
           description: values["description"]));
     });
   }
-
+  //Truy vấn lấy ra tổng thời gian và số tiền người dùng đã dùng cho app
   static Future<Query> getTotalMoneyAndTime() async {
-    return databaseReference
-        .child("users")
-        .child("user1");
+    return databaseReference.child("users").child("user1");
   }
-
+  //Update lại tổng số tiền người dùng đã dùng
   static Future<void> updateTotalMoney(int totalMoney) async {
     return databaseReference
         .child("users")
         .child("user1")
         .update({"totalMoney": totalMoney});
   }
-
+  //Update lại tổng thời gian người dùng đã dùng
   static Future<void> updateTotalTime({int hour, int minutes}) async {
     return databaseReference
         .child("users")
         .child("user1")
         .update({"totalTime": "$hour giờ $minutes phút"});
   }
-
+  //Truy vấn lấy ra thông tin của Card
   static Future<Query> getCard(int userId) async {
     return databaseReference.child("creditCards").child("creditCard$userId");
   }
-
+  //Truy vấn lấy ra số tiền đang có trong thẻ
   static Future<Query> getMoneyCard(int userId) async {
     return databaseReference
         .child("creditCards")
         .child("creditCard$userId")
         .child("amountMoney");
   }
-
+  //Truy vấn lấy ra lịch sử giao dịch
   static Future<Query> getListHistoryTransaction() async {
-    return databaseReference
-        .child("transactionHistorys");
+    return databaseReference.child("transactionHistorys");
   }
-
-  static Future<void> updateStateRentBike(int bikeId) async {
-    return databaseReference
-        .child("bikes")
-        .child("bike$bikeId")
-        .update({"state": "Chưa Sẵn Sàng"});
-  }
-
-  static Future<void> updateStateReturnBike(int bikeId) async {
+  //Update lại trạng thái của xe
+  static Future<void> updateStateActionBike(int bikeId,String state) async {
     return databaseReference
         .child("bikes")
         .child("bike$bikeId")
-        .update({"state": "Sẵn Sàng"});
+        .update({"state": state});
   }
-
+  //Lưu lại lịch sử giao dịch
   static Future<void> saveTransaction(
       {int bikeId,
       String transactionName,
@@ -105,49 +95,29 @@ class DatabaseService {
       "licensePlate": licensePlate
     });
   }
-
-  static Future<void> uploadNotiRentBike(
+  //Lưu lại thông báo thuê ,trả xe
+  static Future<void> uploadNotiActionBike(
       {int bikeId,
       String time,
       int parkingId,
       String typeBike,
       String nameParking,
-      String codeBike}) async {
+      String codeBike,
+      String action}) async {
     return databaseReference.child("notifications").push().set({
       "bikeId": bikeId,
       "userId": 1,
-      "nameNotification": "Thuê $typeBike thành công",
+      "nameNotification": "$action $typeBike thành công",
       "time": time,
       "parkingId": parkingId,
       "description": "Tên bãi xe: $nameParking - Mã xe: $codeBike",
     });
   }
-
-  static Future<void> uploadNotiReturnBike(
-      {int bikeId,
-      String time,
-      int parkingId,
-      String typeBike,
-      String nameParking,
-      String codeBike}) async {
-    return databaseReference.child("notifications").push().set({
-      "bikeId": bikeId,
-      "userId": 1,
-      "nameNotification": "Trả $typeBike thành công",
-      "time": time,
-      "parkingId": parkingId,
-      "description": "Tên bãi xe: $nameParking - Mã xe: $codeBike",
-    });
-  }
-
+  //Update lại tiền trong thẻ
   static Future<void> updateMoneyCard(int totalMoney) async {
     return databaseReference
         .child("creditCards")
         .child("creditCard1")
         .update({"amountMoney": totalMoney});
-  }
-
-  String generateMd5(String input) {
-    return md5.convert(utf8.encode(input)).toString();
   }
 }

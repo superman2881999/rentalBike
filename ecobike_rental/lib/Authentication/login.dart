@@ -3,19 +3,30 @@ import 'package:flutter/material.dart';
 import '../Service/widget.dart';
 import '../Station/home.dart';
 
+/// Lớp này để trả về 1 instance của _LoginState
 class Login extends StatefulWidget {
+  // Nhận vào 1 function làm biến
   const Login(this.toggle);
   final Function toggle;
+  // trả về 1 instance của _LoginState
   @override
   _LoginState createState() => _LoginState();
 }
 
+///Lớp này xử lý logic và giao diện của login
 class _LoginState extends State<Login> {
-  void login() {
-    Navigator.pushReplacement(
+  //Hàm này để chuyển hướng sang Home sau khi người dùng đăng nhập thành công
+  // ignore: avoid_void_async
+  void login(String email, String password) async {
+    await Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => Home()));
   }
 
+  //Biến quản lý đầu vào của người dùng
+  final formKey = GlobalKey<FormState>();
+  final emailUser = TextEditingController();
+  final passWordUser = TextEditingController();
+  // Trả về giao diện Login
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +54,7 @@ class _LoginState extends State<Login> {
                           side: const BorderSide(color: Colors.white, width: 2),
                           borderRadius: BorderRadius.circular(10)),
                       child: Form(
-                        // key: formKey,
+                        key: formKey,
                         child: Column(
                           children: [
                             Container(
@@ -57,10 +68,11 @@ class _LoginState extends State<Login> {
                                         ? null
                                         : "Please provide a valid email";
                                   },
-                                  // controller: emailUser,
-                                  style: simpleTextFieldStyle(Colors.black, 16),
-                                  decoration:
-                                      textFieldInputDecoration("Email")),
+                                  controller: emailUser,
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.black, 16, FontWeight.normal),
+                                  decoration: Service.textFieldInputDecoration(
+                                      "Email")),
                             ),
                             Container(
                               padding: const EdgeInsets.only(
@@ -73,10 +85,11 @@ class _LoginState extends State<Login> {
                                         : "Please provide password "
                                             "6+ characters";
                                   },
-                                  // controller: passWordUser,
-                                  style: simpleTextFieldStyle(Colors.black, 16),
-                                  decoration:
-                                      textFieldInputDecoration("Password")),
+                                  controller: passWordUser,
+                                  style: Service.simpleTextFieldStyle(
+                                      Colors.black, 16, FontWeight.normal),
+                                  decoration: Service.textFieldInputDecoration(
+                                      "Password")),
                             )
                           ],
                         ),
@@ -88,8 +101,8 @@ class _LoginState extends State<Login> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text("Forgot Password ?",
-                        style:
-                            simpleTextFieldStyle(const Color(0xFFEF5350), 14)),
+                        style: Service.simpleTextFieldStyle(
+                            const Color(0xFFEF5350), 14, FontWeight.normal)),
                   ),
                   const SizedBox(
                     height: 60,
@@ -99,7 +112,7 @@ class _LoginState extends State<Login> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          login();
+                          login(emailUser.text, passWordUser.text);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -117,7 +130,8 @@ class _LoginState extends State<Login> {
                                     Color(0xFFEF5350),
                                   ])),
                           child: Text("Sign In",
-                              style: simpleTextFieldStyle(Colors.white, 17)),
+                              style: Service.simpleTextFieldStyle(
+                                  Colors.white, 17, FontWeight.normal)),
                         ),
                       ),
                       Expanded(
@@ -144,15 +158,18 @@ class _LoginState extends State<Login> {
                       children: [
                         Text(
                           "Don't have account?",
-                          style: simpleTextFieldStyle(Colors.black54, 12),
+                          style: Service.simpleTextFieldStyle(
+                              Colors.black54, 12, FontWeight.normal),
                         ),
                         GestureDetector(
                           onTap: () {
                             widget.toggle();
                           },
                           child: Text(" Register now",
-                              style: simpleTextFieldStyle(
-                                  const Color(0xFFEF5350), 13)),
+                              style: Service.simpleTextFieldStyle(
+                                  const Color(0xFFEF5350),
+                                  13,
+                                  FontWeight.normal)),
                         ),
                       ],
                     ),

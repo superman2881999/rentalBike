@@ -1,3 +1,4 @@
+///Lớp Model chứa thông tin của xe
 class BikeModel {
   BikeModel(
       {this.parkingId,

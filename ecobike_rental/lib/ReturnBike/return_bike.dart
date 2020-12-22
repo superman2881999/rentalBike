@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../IntroApp/splash_screen.dart';
 import '../Model/bike_model.dart';
 import '../Service/credit_card_info.dart';
+import '../Service/database.dart';
 import '../Service/widget.dart';
 import '../Station/home.dart';
-import '../service/database.dart';
 
+///Lớp này trả về 1 instance _ReturnBikeState
 class ReturnBike extends StatefulWidget {
+  //Constructor này nhận vào thời gian thuê xe, thông tin xe thuê, tiền phải trả
   const ReturnBike(this.timeRentBike, this.bikeModel, this.paymentMoney);
   final String timeRentBike;
   final BikeModel bikeModel;
@@ -16,20 +17,24 @@ class ReturnBike extends StatefulWidget {
   @override
   _ReturnBikeState createState() => _ReturnBikeState();
 }
-
+///Lớp này quản lý trả xe và hiển thị thông tin cho người dùng check
 class _ReturnBikeState extends State<ReturnBike> {
-  DateTime now;
-  DateFormat formatter;
+  //Khai báo biến lưu ngày thuê
   String dateRentBike;
+  //Khai báo biến lưu tổng tiền đã thanh toán(đã công tiền cọc và trừ tiền thuê)
   int totalMoney;
+  //Khai báo biến lưu tiền có sẵn trong thẻ
   int moneyCardIssue;
   @override
   void initState() {
+    //Tiền đã thanh toán
     totalMoney = widget.bikeModel.deposit - widget.paymentMoney;
+    //Lấy tiền có sẵn trong thẻ
     DatabaseService.getMoneyCard(1).then((value) {
       value.once().then((snapshot) {
         moneyCardIssue = snapshot.value;
       }).whenComplete(() {
+        //update lại tiền trong thẻ
         final moneyCard = totalMoney + moneyCardIssue;
         DatabaseService.updateMoneyCard(moneyCard);
       });
@@ -37,27 +42,31 @@ class _ReturnBikeState extends State<ReturnBike> {
     // lấy total time và total money
     DatabaseService.getTotalMoneyAndTime().then((value) {
       value.once().then((snapshot) {
+
         SplashScreen.totalMoney = snapshot.value["totalMoney"];
+        //update tổng số tiền người dùng đã trả khi dùng app
         DatabaseService.updateTotalMoney(
             SplashScreen.totalMoney + widget.paymentMoney);
+        //lấy thời gian đã sự dụng từ trước trên server
         SplashScreen.totalTime = snapshot.value["totalTime"];
+        //Cộng thêm thời gian vừa thuê
         final seconds = changeTime(SplashScreen.totalTime) +
             changeTime2(widget.timeRentBike);
+        //update tổng thời gian người dùng đã trả khi dùng app
         DatabaseService.updateTotalTime(
             hour: seconds ~/ 3600,
             minutes: (seconds - (seconds ~/ 3600) * 3600) ~/ 60);
       });
     });
-
     super.initState();
   }
-
+  //change thời gian có sẵn thành phút
   int changeTime(String time) {
     final list = time.split(" ");
     final minutes = int.parse(list[0]) * 3600 + int.parse(list[2]) * 60;
     return minutes;
   }
-
+  //change thời gian đã sử dụng thành phút
   int changeTime2(String time) {
     final list = time.split(":");
     final minutes = int.parse(list[0]) * 3600 +
@@ -65,16 +74,14 @@ class _ReturnBikeState extends State<ReturnBike> {
         int.parse(list[2]);
     return minutes;
   }
-
+  //Trả về widget hiển thị thông tin hóa đơn
   @override
   Widget build(BuildContext context) {
     setState(() {
-      now = DateTime.now();
-      formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
-      dateRentBike = formatter.format(now);
+      dateRentBike = Service.formatDate();
     });
     return Scaffold(
-        appBar: appBarMain(const Text("Thông tin hoá đơn"), context),
+        appBar: Service.appBarMain(const Text("Thông tin hoá đơn"), context),
         body: Column(
           children: [
             Expanded(
@@ -95,59 +102,81 @@ class _ReturnBikeState extends State<ReturnBike> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text("Thông tin dịch vụ",
-                                    style: especiallyTextFieldStyle(
-                                        Colors.black, 18)),
+                                    style: Service.simpleTextFieldStyle(
+                                        Colors.black, 18, FontWeight.bold)),
                                 Row(
+                                  //Hiển thị ngày thuê
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Ngày thuê",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     Text(dateRentBike,
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal))
                                   ],
                                 ),
                                 Row(
+                                  //Hiển thị thời gian thuê
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Thời gian thuê",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     Text(widget.timeRentBike,
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal))
                                   ],
                                 ),
                                 Row(
+                                  //Hiển thị loại xe đã thuê
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Loại xe",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     Text(widget.bikeModel.typeBike,
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal))
                                   ],
                                 ),
                                 Row(
+                                  //Hiển thị biển số xe
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Biển số xe",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     if (widget.bikeModel.licensePlate == null)
                                       Text("Không có",
-                                          style: simpleTextFieldStyle(
-                                              Colors.black, 16))
+                                          style: Service.simpleTextFieldStyle(
+                                              Colors.black,
+                                              16,
+                                              FontWeight.normal))
                                     else
                                       Text(widget.bikeModel.licensePlate,
-                                          style: simpleTextFieldStyle(
-                                              Colors.black, 16))
+                                          style: Service.simpleTextFieldStyle(
+                                              Colors.black,
+                                              16,
+                                              FontWeight.normal))
                                   ],
                                 ),
                               ],
@@ -169,42 +198,57 @@ class _ReturnBikeState extends State<ReturnBike> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text("Chi phí",
-                                    style: especiallyTextFieldStyle(
-                                        Colors.black, 18)),
+                                    style: Service.simpleTextFieldStyle(
+                                        Colors.black, 18, FontWeight.bold)),
                                 Row(
+                                  //Hiển thị tiền cọc
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Tiền cọc",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     Text("+ ${widget.bikeModel.deposit} đ",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal))
                                   ],
                                 ),
                                 Row(
+                                  //Hiển thị tiền thuê xe
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Tiền thuê xe",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     Text("- ${widget.paymentMoney} đ",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal))
                                   ],
                                 ),
                                 Row(
+                                  //Hiển thị các chi phí phụ khác
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Chi phí phụ",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16)),
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal)),
                                     Text("- 0 đ",
-                                        style: simpleTextFieldStyle(
-                                            Colors.black, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.black,
+                                            16,
+                                            FontWeight.normal))
                                   ],
                                 ),
                                 const Divider(
@@ -213,18 +257,19 @@ class _ReturnBikeState extends State<ReturnBike> {
                                   endIndent: 20,
                                 ),
                                 Row(
+                                  //Hiển thị tiền đã thanh toán
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                         child: Text(
                                       "Đã thanh toán",
-                                      style: especiallyTextFieldStyle(
-                                          Colors.red, 16),
+                                      style: Service.simpleTextFieldStyle(
+                                          Colors.red, 16, FontWeight.bold),
                                     )),
                                     Text("+ $totalMoney đ",
-                                        style: especiallyTextFieldStyle(
-                                            Colors.red, 16))
+                                        style: Service.simpleTextFieldStyle(
+                                            Colors.red, 16, FontWeight.bold))
                                   ],
                                 )
                               ],
@@ -241,6 +286,7 @@ class _ReturnBikeState extends State<ReturnBike> {
               padding: const EdgeInsets.all(10),
               child: GestureDetector(
                 onTap: () {
+                  //Lưu lại lịch sử giao dịch thuê xe
                   DatabaseService.saveTransaction(
                       bikeId: widget.bikeModel.bikeId,
                       dateRentBike: dateRentBike,
@@ -250,6 +296,7 @@ class _ReturnBikeState extends State<ReturnBike> {
                       typeBike: widget.bikeModel.typeBike,
                       transactionName:
                           "Thuê ${widget.bikeModel.typeBike} đi Bách Khoa");
+                  //Chuyển về màn hình Home
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => Home()),
                       (route) => false);
@@ -263,7 +310,8 @@ class _ReturnBikeState extends State<ReturnBike> {
                     child: ButtonTheme(
                         child: Center(
                       child: Text("Hoàn tất dịch vụ",
-                          style: simpleTextFieldStyle(Colors.white, 17)),
+                          style: Service.simpleTextFieldStyle(
+                              Colors.white, 17, FontWeight.normal)),
                     ))),
               ),
             ),
@@ -271,6 +319,7 @@ class _ReturnBikeState extends State<ReturnBike> {
               padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
               child: GestureDetector(
                 onTap: () {
+                  //Chuyển về màn hình thẻ của người dùng để check tiền
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -285,7 +334,8 @@ class _ReturnBikeState extends State<ReturnBike> {
                     child: ButtonTheme(
                         child: Center(
                       child: Text("Kiểm tra tài khoản",
-                          style: simpleTextFieldStyle(Colors.white, 17)),
+                          style: Service.simpleTextFieldStyle(
+                              Colors.white, 17, FontWeight.normal)),
                     ))),
               ),
             ),

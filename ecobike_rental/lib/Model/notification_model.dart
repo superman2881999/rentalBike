@@ -1,3 +1,4 @@
+///Lớp model chứa thông tin thông báo
 class NotificationModel {
   NotificationModel(
       {this.userId,

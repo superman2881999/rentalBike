@@ -19,28 +19,20 @@ import java.util.Date;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.embedding.android.FlutterActivity;
-import io.flutter.embedding.engine.FlutterEngine;
-import io.flutter.plugin.common.MethodChannel;
-
-//import io.flutter.app.FlutterActivity;
-import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
-    private static final String CHANNEL = "com.flutter.epic/epic";
+    private static final String CHANNEL = "Transaction";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new MethodChannel(getFlutterEngine().getDartExecutor().getBinaryMessenger(), CHANNEL).setMethodCallHandler(new MethodChannel.MethodCallHandler() {
             @Override
             public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
-                if (methodCall.method.equals("Printy")) {
+                if (methodCall.method.equals("Transaction")) {
                     String key = "BLSSBlwOmxo=";
                     String url = "https://ecopark-system-api.herokuapp.com/api/card/processTransaction";
                     JSONObject bodyRequest;
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                     try {
-                        String strDate = formatter.format(new Date());
                         JSONObject transaction = new JSONObject();
                         transaction.put("command", methodCall.argument("command"));
                         transaction.put("cardCode", methodCall.argument("cardCode"));
@@ -50,6 +42,7 @@ public class MainActivity extends FlutterActivity {
                         transaction.put("transactionContent", methodCall.argument("transactionContent"));
                         transaction.put("amount", methodCall.argument("amount"));
                         transaction.put("createdAt", methodCall.argument("createdAt"));
+
 
                         JSONObject obj = new JSONObject();
                         obj.put("secretKey", key);
@@ -68,13 +61,44 @@ public class MainActivity extends FlutterActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    Log.v("TAG",response.toString());
                                     result.success(response.getString("errorCode"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                         },
+                                new Response.ErrorListener(){
+                                    @Override
+                                    public void onErrorResponse(VolleyError error){
+                                        Log.e("TAG", "JsonArrayRequest onErrorResponse: " + error.getMessage());
+                                    }
+                                });
+                        VolleySingleton.getInstance(getBaseContext()).getRequestQueue().add(request);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else if(methodCall.method.equals("resetMoney")){
+                    String url = "https://ecopark-system-api.herokuapp.com/api/card/reset-balance";
+                    JSONObject transaction;
+                    try {
+                        transaction = new JSONObject();
+                       // transaction.put("command", methodCall.argument("command"));
+                        transaction.put("cardCode", methodCall.argument("cardCode"));
+                        transaction.put("owner", methodCall.argument("owner"));
+                        transaction.put("cvvCode", methodCall.argument("cvvCode"));
+                        transaction.put("dateExpired", methodCall.argument("dateExpired"));
+
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PATCH, url, transaction,
+                                new Response.Listener<JSONObject>(){
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        try {
+                                            result.success(response.getString("errorCode"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                },
                                 new Response.ErrorListener(){
                                     @Override
                                     public void onErrorResponse(VolleyError error){
