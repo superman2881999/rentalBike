@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Service/widget.dart';
+import '../Helper/widget.dart';
 
 class Register extends StatefulWidget {
   const Register(this.toggle);
@@ -50,9 +50,9 @@ class _RegisterState extends State<Register> {
                                         : null;
                                   },
                                   //controller: userName,
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.black26, 16, FontWeight.normal),
-                                  decoration: Service.textFieldInputDecoration(
+                                  decoration: Helper.textFieldInputDecoration(
                                       "UserName")),
                             ),
                             Container(
@@ -67,9 +67,9 @@ class _RegisterState extends State<Register> {
                                         : "Please provide a valid email";
                                   },
                                   // controller: emailUser,
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.black26, 16, FontWeight.normal),
-                                  decoration: Service.textFieldInputDecoration(
+                                  decoration: Helper.textFieldInputDecoration(
                                       "Email")),
                             ),
                             Container(
@@ -84,9 +84,9 @@ class _RegisterState extends State<Register> {
                                             "6+ characters";
                                   },
                                   // controller: passWordUser,
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.black26, 16, FontWeight.normal),
-                                  decoration: Service.textFieldInputDecoration(
+                                  decoration: Helper.textFieldInputDecoration(
                                       "Password")),
                             )
                           ],
@@ -115,7 +115,7 @@ class _RegisterState extends State<Register> {
                                   Color(0xFFEF5350),
                                 ])),
                         child: Text("Register",
-                            style:Service.simpleTextFieldStyle(
+                            style:Helper.simpleTextFieldStyle(
                                 Colors.white, 17, FontWeight.normal)),
                       ),
                       Expanded(
@@ -141,7 +141,7 @@ class _RegisterState extends State<Register> {
                       children: [
                         Text(
                           "Do you have account?",
-                          style: Service.simpleTextFieldStyle(
+                          style: Helper.simpleTextFieldStyle(
                               Colors.black54, 12, FontWeight.normal),
                         ),
                         Expanded(
@@ -153,7 +153,7 @@ class _RegisterState extends State<Register> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8),
                                 child: Text(" Login now",
-                                    style: Service.simpleTextFieldStyle(
+                                    style: Helper.simpleTextFieldStyle(
                                         const Color(0xFFEF5350),
                                         13,
                                         FontWeight.normal))),

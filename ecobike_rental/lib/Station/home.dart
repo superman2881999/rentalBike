@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Helper/drawer.dart';
+import '../Helper/widget.dart';
 import '../IntroApp/splash_screen.dart';
 import '../Model/parking_model.dart';
-import '../Service/drawer.dart';
-import '../Service/widget.dart';
 import 'parking_detail.dart';
 
 /// Trả về instance của _HomeState
@@ -29,10 +29,14 @@ class _HomeState extends State<Home> {
   //Trả về giao diện bãi xe
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      //cập nhật bãi xe liên tục
+      listParking = SplashScreen.listParking;
+    });
     return Scaffold(
-        appBar: Service.appBarMain(
+        appBar: Helper.appBarMain(
             Image.asset("images/title.png", fit: BoxFit.cover), context),
-        drawer: Draw(),
+        drawer: const Draw(check: true),
         body: listParking.isEmpty
             ? Center(child: Image.asset("images/no.png"))
             : ListView.builder(
@@ -69,7 +73,7 @@ class _HomeState extends State<Home> {
                             child: Image.asset("images/bikeParking.png",
                                 fit: BoxFit.cover)),
                         title: Text(listParking[index].nameParking,
-                            style: Service.simpleTextFieldStyle(
+                            style: Helper.simpleTextFieldStyle(
                                 Colors.black, 17, FontWeight.bold)),
                         subtitle: Text(listParking[index].description),
                         trailing: const Icon(Icons.keyboard_arrow_right,

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Helper/widget.dart';
 import '../IntroApp/splash_screen.dart';
 import '../Model/notification_model.dart';
 import 'custom_clip_path.dart';
-import 'widget.dart';
 
 ///Trả về 1 instance _NotifyState
 class Notify extends StatefulWidget {
@@ -19,7 +19,9 @@ class _NotifyState extends State<Notify> {
   //Khởi tạo màn hình hiển thị danh sách thông báo
   @override
   void initState() {
-    listNotification = SplashScreen.listNotification;
+    setState(() {
+      listNotification = SplashScreen.listNotification;
+    });
     super.initState();
   }
 
@@ -27,7 +29,7 @@ class _NotifyState extends State<Notify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Service.appBarNotification("Thông báo", context),
+        appBar: Helper.appBarNotification("Thông báo", context),
         body: listNotification.isEmpty
             ? const Center(child: Text("Không có thông báo nào"))
             : Padding(
@@ -51,7 +53,7 @@ class _NotifyState extends State<Notify> {
                                           listNotification.length - index - 1]
                                       .nameNotification,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.black, 18, FontWeight.normal),
                                 ),
                                 subtitle: Transform(
@@ -62,7 +64,7 @@ class _NotifyState extends State<Notify> {
                                               index -
                                               1]
                                           .description,
-                                      style: Service.simpleTextFieldStyle(
+                                      style: Helper.simpleTextFieldStyle(
                                           Colors.black45,
                                           15,
                                           FontWeight.normal)),
@@ -71,7 +73,7 @@ class _NotifyState extends State<Notify> {
                                     listNotification[
                                             listNotification.length - index - 1]
                                         .time,
-                                    style: Service.simpleTextFieldStyle(
+                                    style: Helper.simpleTextFieldStyle(
                                         Colors.black45, 14, FontWeight.normal)),
                               ),
                             ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'credit_card_info.dart';
-import 'transaction_history.dart';
+import '../CreditCard/credit_card_info.dart';
+import '../TransactionHistory/transaction_history.dart';
 import 'widget.dart';
 
 ///Trả về 1 instance _DrawState
 class Draw extends StatefulWidget {
+  const Draw({this.check});
+  final bool check;
   @override
   _DrawState createState() => _DrawState();
 }
+
 ///Trả về draw của app chứa những tương tác, và thông tin của người dùng
 class _DrawState extends State<Draw> {
   //Trả về giao diện draw giúp người dùng tương tác
@@ -40,12 +43,12 @@ class _DrawState extends State<Draw> {
                             Text(
                               "Dũng Lê",
                               overflow: TextOverflow.ellipsis,
-                              style: Service.simpleTextFieldStyle(
+                              style: Helper.simpleTextFieldStyle(
                                   Colors.white, 18, FontWeight.normal),
                             ),
                             Text("Killteammate@gmail.com",
                                 overflow: TextOverflow.ellipsis,
-                                style: Service.simpleTextFieldStyle(
+                                style: Helper.simpleTextFieldStyle(
                                     Colors.white, 14, FontWeight.normal)),
                           ],
                         ),
@@ -65,7 +68,7 @@ class _DrawState extends State<Draw> {
                       MaterialPageRoute(
                           builder: (context) => TransactionHistory()));
                 },
-                child: Service.listTile("Lịch sử thuê xe", Icons.access_time)),
+                child: Helper.listTile("Lịch sử thuê xe", Icons.access_time)),
             GestureDetector(
                 onTap: () {
                   //Chuyển hướng sang màn hình thông tin thẻ tín dụng
@@ -74,22 +77,27 @@ class _DrawState extends State<Draw> {
                       MaterialPageRoute(
                           builder: (context) => CreditCardInfo()));
                 },
-                child: Service.listTile("Thẻ tín dụng", Icons.credit_card)),
+                child: Helper.listTile("Thẻ tín dụng", Icons.credit_card)),
             const Padding(
               padding: EdgeInsets.all(8),
               child: Text("TÀI KHOẢN VÀ HỖ TRỢ"),
             ),
-            Service.listTile("Thông tin tài khoản", Icons.account_circle),
-            Service.listTile("Cài đặt", Icons.settings),
+            Helper.listTile("Thông tin tài khoản", Icons.account_circle),
+            Helper.listTile("Cài đặt", Icons.settings),
             GestureDetector(
                 onTap: () {
-                  Service.alertDialogLogout(context);
+                  if (widget.check) {
+                    Helper.alertDialogLogout(context);
+                  } else {
+                    Helper.alertDialogNotiStateBike(
+                        context, "Bạn không thể đăng xuất khi thuê xe");
+                  }
                 },
                 child: ListTile(
                   leading: IconButton(
                       icon: const Icon(Icons.exit_to_app), onPressed: () {}),
                   title: Text("Đăng xuất",
-                      style: Service.simpleTextFieldStyle(
+                      style: Helper.simpleTextFieldStyle(
                           Colors.black, 16, FontWeight.normal)),
                 )),
           ],

@@ -1,20 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
+import '../Helper/drawer.dart';
+import '../Helper/widget.dart';
 import '../IntroApp/splash_screen.dart';
 import '../Model/bike_model.dart';
-import '../ReturnBike/return_bike.dart';
-import '../Service/drawer.dart';
-import '../Service/widget.dart';
-import '../service/database.dart';
-import 'calculator_money.dart';
+import 'rent_bike_controller.dart';
 
 ///Lớp quản lý sau khi thuê xe, trả về 1 instance _RentBikeState
 class RentBike extends StatefulWidget {
@@ -40,7 +37,6 @@ class _RentBikeState extends State<RentBike> {
   //google map
   GoogleMapController mapController;
   Set<Marker> markers;
-  Marker marker;
   //List chứa các điểm bãi xe
   List<Map<String, LatLng>> listOfMarker;
   // List chứa thông tin của từng bãi xe
@@ -50,9 +46,6 @@ class _RentBikeState extends State<RentBike> {
   bool isReturnBike = false;
   //Biến cập nhật tiền phải trả
   int paymentMoney = 0;
-
-  //call native code java from flutter
-  static const platform = MethodChannel("Transaction");
 
   //progress
   ProgressDialog progressDialog;
@@ -94,22 +87,15 @@ class _RentBikeState extends State<RentBike> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      if (isReturnBike) {
-        for (var i = 0; i < listOfMarker.length; i++) {
-          marker = Marker(
-              position: listOfMarker[i]['latLng'],
-              markerId: MarkerId(listOfMarkerInfo[i]['marker']),
-              infoWindow: InfoWindow(
-                  title: listOfMarkerInfo[i]['title'],
-                  snippet: listOfMarkerInfo[i]['subtitle']),
-              icon: BitmapDescriptor.defaultMarker);
-          markers.add(marker);
-        }
-      }
+      RentBikeController.handleListMarkers(
+          isReturnBike: isReturnBike,
+          listOfMarker: listOfMarker,
+          listOfMarkerInfo: listOfMarkerInfo,
+          markers: markers);
     });
     return Scaffold(
-      appBar: Service.appBarMain(const Text("Đang thuê xe"), context),
-      drawer: Draw(),
+      appBar: Helper.appBarMain(const Text("Đang thuê xe"), context),
+      drawer: const Draw(check: false),
       body: Stack(
         children: [
           //Tạo widget bản đồ để hiển thị cho người dùng xem vị trí của mình
@@ -144,7 +130,7 @@ class _RentBikeState extends State<RentBike> {
                   children: [
                     Expanded(
                         //Card hiển thị thời gian thuê
-                        child: Service.card(
+                        child: Helper.card(
                             "Thời gian thuê",
                             StreamBuilder<Object>(
                                 stream: widget._stopWatchTimer.rawTime,
@@ -158,7 +144,7 @@ class _RentBikeState extends State<RentBike> {
                                   return Padding(
                                     padding: const EdgeInsets.all(6),
                                     child: Text(displayTime,
-                                        style: Service.simpleTextFieldStyle(
+                                        style: Helper.simpleTextFieldStyle(
                                             Colors.black,
                                             14,
                                             FontWeight.normal)),
@@ -166,41 +152,41 @@ class _RentBikeState extends State<RentBike> {
                                 }))),
                     Expanded(
                         //Card hiển thị tiền phải trả xe
-                        child: Service.card(
+                        child: Helper.card(
                             "Tiền phải trả",
                             StreamBuilder<Object>(
-                                stream: widget._stopWatchTimer.minuteTime,
+                                stream: widget._stopWatchTimer.secondTime,
                                 initialData:
-                                    widget._stopWatchTimer.minuteTime.value,
+                                    widget._stopWatchTimer.secondTime.value,
                                 builder: (context, snapshot) {
                                   final int minuteTime = snapshot.data;
                                   paymentMoney =
-                                      CalculatorMoney.calculatorMoney(
+                                      RentBikeController.calculatorMoney(
                                           minuteTime);
                                   return Padding(
                                     padding: const EdgeInsets.all(6),
                                     child: Text(
                                       "$paymentMoney đ",
-                                      style: Service.simpleTextFieldStyle(
+                                      style: Helper.simpleTextFieldStyle(
                                           Colors.black, 14, FontWeight.normal),
                                     ),
                                   );
                                 }))),
                     Expanded(
                         //Card hiện số pin còn lại của xe
-                        child: Service.card(
+                        child: Helper.card(
                             "Pin còn lại",
                             Padding(
                               padding: const EdgeInsets.all(6),
                               child: widget.bikeModel.batteryCapacity == null
                                   ? Text(
                                       "Không có",
-                                      style: Service.simpleTextFieldStyle(
+                                      style: Helper.simpleTextFieldStyle(
                                           Colors.black, 14, FontWeight.normal),
                                     )
                                   : Text(
                                       "${widget.bikeModel.batteryCapacity}%",
-                                      style: Service.simpleTextFieldStyle(
+                                      style: Helper.simpleTextFieldStyle(
                                           Colors.black, 14, FontWeight.normal),
                                     ),
                             ))),
@@ -269,7 +255,7 @@ class _RentBikeState extends State<RentBike> {
                           color: Colors.redAccent),
                       child: ButtonTheme(
                           child: Text("Trả xe",
-                              style: Service.simpleTextFieldStyle(
+                              style: Helper.simpleTextFieldStyle(
                                   Colors.white, 17, FontWeight.normal)))),
                 ),
                 //Widget này giúp người dùng quay về vị trí của mình trên bản đồ
@@ -304,10 +290,9 @@ class _RentBikeState extends State<RentBike> {
         backgroundColor: const Color(0xFFEBE3E3),
         isScrollControlled: true,
         context: context,
-        builder: (buildcontext) {
-          progressDialog = ProgressDialog(buildcontext,
+        builder: (buildContext) {
+          progressDialog = ProgressDialog(buildContext,
               type: ProgressDialogType.Normal, isDismissible: false);
-          var percentage = 0;
           return SizedBox(
             height: MediaQuery.of(context).size.height / 2,
             child: Padding(
@@ -318,7 +303,7 @@ class _RentBikeState extends State<RentBike> {
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       "Chọn bãi xe gần bạn để trả xe",
-                      style: Service.simpleTextFieldStyle(
+                      style: Helper.simpleTextFieldStyle(
                           Colors.black, 18, FontWeight.normal),
                     ),
                   ),
@@ -347,100 +332,26 @@ class _RentBikeState extends State<RentBike> {
                                         await progressDialog.show();
                                         await Future.delayed(
                                                 const Duration(seconds: 5))
-                                            .then((onvalue) async {
-                                          percentage = percentage + 30;
-                                          // lấy errorCode sau khi trả xe
-                                          await transaction(paymentMoney,
-                                                  widget.bikeModel.typeBike)
-                                              .then((res) async {
-                                            progressDialog.update(
-                                              progress: percentage.toDouble(),
-                                              message: "Vui lòng đợi...",
-                                            );
-                                            //Trường hợp trả xe thành công
-                                            if (res == "00") {
-                                              // Lấy thời gian thuê xe
-                                              final timeRentBike =
-                                                  StopWatchTimer.getDisplayTime(
-                                                      value,
-                                                      milliSecond: false);
-                                              widget._stopWatchTimer.onExecute
-                                                  .add(StopWatchExecute.stop);
-                                              // ignore: lines_longer_than_80_chars
-                                              //Hiện thông báo local trả xe báo thành công
-                                              // ignore: lines_longer_than_80_chars
-                                              await _showNotificationWithDefaultSound(
-                                                  widget
+                                            .then((_) async {
+                                          await RentBikeController
+                                              .handleTransaction(
+                                                  amount: paymentMoney,
+                                                  typeBike:
+                                                      widget.bikeModel.typeBike,
+                                                  progressDialog:
+                                                      progressDialog,
+                                                  context: context,
+                                                  nameParking:
+                                                      listOfMarkerInfo[index]
+                                                          ['title'],
+                                                  stopWatchTimer:
+                                                      widget._stopWatchTimer,
+                                                  // ignore: lines_longer_than_80_chars
+                                                  flutterLocalNotificationsPlugin: widget
                                                       // ignore: lines_longer_than_80_chars
                                                       .flutterLocalNotificationsPlugin,
-                                                  // ignore: lines_longer_than_80_chars
-                                                  "Trả ${widget.bikeModel.typeBike} thành công",
-                                                  // ignore: lines_longer_than_80_chars
-                                                  "Tên bãi xe: ${listOfMarkerInfo[index]['title']} - Mã xe: ${widget.bikeModel.codeBike}");
-                                              //update lại state sẵn sàng của xe
-                                              await DatabaseService
-                                                  .updateStateActionBike(
-                                                      widget.bikeModel.bikeId,
-                                                      "Sẵn Sàng");
-                                              //Lưu thông báo trả xe thành công
-                                              await DatabaseService
-                                                  .uploadNotiActionBike(
-                                                      bikeId: widget
-                                                          .bikeModel.bikeId,
-                                                      parkingId: widget
-                                                          .bikeModel.parkingId,
-                                                      codeBike: widget
-                                                          .bikeModel.codeBike,
-                                                      typeBike: widget
-                                                          .bikeModel.typeBike,
-                                                      nameParking:
-                                                          listOfMarkerInfo[
-                                                              index]['title'],
-                                                      time:
-                                                          Service.formatDate(),
-                                                      action: "Trả");
-                                              //Ẩn progress khi đã xử lý hết
-                                              await progressDialog.hide();
-                                              //Chuyển sang màn hình trả xe
-                                              await Navigator
-                                                  .pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ReturnBike(
-                                                                timeRentBike,
-                                                                widget
-                                                                    .bikeModel,
-                                                                paymentMoney),
-                                                      ),
-                                                      (route) => false);
-                                              //Trường hợp người dùng gian lận
-                                            } else if (res == "04") {
-                                              await progressDialog.hide();
-                                              // ignore: lines_longer_than_80_chars
-                                              await Service.alertDialogNotiStateBike(
-                                                  context,
-                                                  // ignore: lines_longer_than_80_chars
-                                                  'Giao dịch bị nghi ngờ gian lận');
-                                              //Trường hợp không đủ thông tin
-                                            } else if (res == "05") {
-                                              await progressDialog.hide();
-                                              // ignore: lines_longer_than_80_chars
-                                              await Service.alertDialogNotiStateBike(
-                                                  context,
-                                                  // ignore: lines_longer_than_80_chars
-                                                  'Không đủ thông tin giao dịch');
-                                              //Trường hợp thẻ không đủ tiền
-                                            } else if (res == "02") {
-                                              await progressDialog.hide();
-                                              // ignore: lines_longer_than_80_chars
-                                              await Service
-                                                  .alertDialogNotiStateBike(
-                                                      context,
-                                                      // ignore: lines_longer_than_80_chars
-                                                      'Thẻ không đủ số dư');
-                                            }
-                                          });
+                                                  bikeModel: widget.bikeModel,
+                                                  result: value);
                                         });
                                       },
                                       iconSize: 30),
@@ -456,46 +367,4 @@ class _RentBikeState extends State<RentBike> {
           );
         });
   }
-
-  // Hàm call api, trả về errorCode
-  Future<String> transaction(int amount, String typeBike) async {
-    String value;
-    try {
-      //Hỗ trợ call sang java
-      value = await platform.invokeMethod('Transaction', {
-        "command": "pay",
-        "cardCode": "118609_group5_2020",
-        "owner": "Group 5",
-        "cvvCode": "271",
-        "dateExpired": "1125",
-        "transactionContent": "Thanh toán trả $typeBike",
-        "amount": amount,
-        "createdAt": Service.formatDate(),
-      });
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-    return value;
-  }
-}
-
-// Hàm trả về thông báo cho người dùng
-Future _showNotificationWithDefaultSound(
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-    String nameNotification,
-    String description) async {
-  const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your channel id', 'your channel name', 'your channel description',
-      importance: Importance.Max, priority: Priority.High);
-  const iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  const platformChannelSpecifics = NotificationDetails(
-      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-  await flutterLocalNotificationsPlugin.show(
-    0,
-    nameNotification,
-    description,
-    platformChannelSpecifics,
-    payload: 'Default_Sound',
-  );
 }

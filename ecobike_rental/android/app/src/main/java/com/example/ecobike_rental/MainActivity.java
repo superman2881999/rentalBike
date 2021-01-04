@@ -28,21 +28,20 @@ public class MainActivity extends FlutterActivity {
         new MethodChannel(getFlutterEngine().getDartExecutor().getBinaryMessenger(), CHANNEL).setMethodCallHandler(new MethodChannel.MethodCallHandler() {
             @Override
             public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
-                if (methodCall.method.equals("Transaction")) {
+                if (methodCall.method.equals("transaction")) {
                     String key = "BLSSBlwOmxo=";
                     String url = "https://ecopark-system-api.herokuapp.com/api/card/processTransaction";
                     JSONObject bodyRequest;
                     try {
                         JSONObject transaction = new JSONObject();
                         transaction.put("command", methodCall.argument("command"));
-                        transaction.put("cardCode", methodCall.argument("cardCode"));
+                        transaction.put("cardCode", methodCall.argument("codeCard"));
                         transaction.put("owner", methodCall.argument("owner"));
                         transaction.put("cvvCode", methodCall.argument("cvvCode"));
                         transaction.put("dateExpired", methodCall.argument("dateExpired"));
                         transaction.put("transactionContent", methodCall.argument("transactionContent"));
                         transaction.put("amount", methodCall.argument("amount"));
                         transaction.put("createdAt", methodCall.argument("createdAt"));
-
 
                         JSONObject obj = new JSONObject();
                         obj.put("secretKey", key);
@@ -61,6 +60,7 @@ public class MainActivity extends FlutterActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
+                                    Log.v("TAG",response.getString("errorCode"));
                                     result.success(response.getString("errorCode"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -82,8 +82,7 @@ public class MainActivity extends FlutterActivity {
                     JSONObject transaction;
                     try {
                         transaction = new JSONObject();
-                       // transaction.put("command", methodCall.argument("command"));
-                        transaction.put("cardCode", methodCall.argument("cardCode"));
+                        transaction.put("cardCode", methodCall.argument("codeCard"));
                         transaction.put("owner", methodCall.argument("owner"));
                         transaction.put("cvvCode", methodCall.argument("cvvCode"));
                         transaction.put("dateExpired", methodCall.argument("dateExpired"));
@@ -93,6 +92,7 @@ public class MainActivity extends FlutterActivity {
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         try {
+                                            Log.v("TAG",response.getString("errorCode"));
                                             result.success(response.getString("errorCode"));
                                         } catch (JSONException e) {
                                             e.printStackTrace();

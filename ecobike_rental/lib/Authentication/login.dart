@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Service/widget.dart';
+import '../Helper/widget.dart';
 import '../Station/home.dart';
 
 /// Lớp này để trả về 1 instance của _LoginState
@@ -69,9 +69,9 @@ class _LoginState extends State<Login> {
                                         : "Please provide a valid email";
                                   },
                                   controller: emailUser,
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.black, 16, FontWeight.normal),
-                                  decoration: Service.textFieldInputDecoration(
+                                  decoration: Helper.textFieldInputDecoration(
                                       "Email")),
                             ),
                             Container(
@@ -86,9 +86,9 @@ class _LoginState extends State<Login> {
                                             "6+ characters";
                                   },
                                   controller: passWordUser,
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.black, 16, FontWeight.normal),
-                                  decoration: Service.textFieldInputDecoration(
+                                  decoration: Helper.textFieldInputDecoration(
                                       "Password")),
                             )
                           ],
@@ -101,7 +101,7 @@ class _LoginState extends State<Login> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text("Forgot Password ?",
-                        style: Service.simpleTextFieldStyle(
+                        style: Helper.simpleTextFieldStyle(
                             const Color(0xFFEF5350), 14, FontWeight.normal)),
                   ),
                   const SizedBox(
@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
                                     Color(0xFFEF5350),
                                   ])),
                           child: Text("Sign In",
-                              style: Service.simpleTextFieldStyle(
+                              style: Helper.simpleTextFieldStyle(
                                   Colors.white, 17, FontWeight.normal)),
                         ),
                       ),
@@ -158,7 +158,7 @@ class _LoginState extends State<Login> {
                       children: [
                         Text(
                           "Don't have account?",
-                          style: Service.simpleTextFieldStyle(
+                          style: Helper.simpleTextFieldStyle(
                               Colors.black54, 12, FontWeight.normal),
                         ),
                         GestureDetector(
@@ -166,7 +166,7 @@ class _LoginState extends State<Login> {
                             widget.toggle();
                           },
                           child: Text(" Register now",
-                              style: Service.simpleTextFieldStyle(
+                              style: Helper.simpleTextFieldStyle(
                                   const Color(0xFFEF5350),
                                   13,
                                   FontWeight.normal)),

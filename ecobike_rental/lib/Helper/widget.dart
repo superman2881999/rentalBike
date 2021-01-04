@@ -1,20 +1,26 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../Model/bike_model.dart';
-import '../RentBike/after_rent_bike.dart';
+import '../Notification/notification.dart';
 import '../RentBike/bike_detail.dart';
 import '../authentication/authentication.dart';
-import 'database.dart';
-import 'notification.dart';
 
 ///Class này để chứa những widget và hàm dùng chung cho app
-class Service {
+class Helper {
+  static FlutterLocalNotificationsPlugin initNotify() {
+    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsIOS = IOSInitializationSettings();
+    const initializationSettings = InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    return flutterLocalNotificationsPlugin;
+  }
+
   // Widget này trả về một AppBar chứa 1 action Notify
   static Widget appBarMain(Widget widget, BuildContext context) {
     return AppBar(
@@ -68,125 +74,6 @@ class Service {
       return 'Mã xe chỉ chứa chữ số';
     }
     return 'Thành công';
-  }
-
-  // Hàm xử lý Quá trình Thuê xe
-// Trả về dialog để người dùng xác nhận thuê xe
-  static Future<void> alertDialogRentBike(
-      BuildContext buildContext,
-      StopWatchTimer _stopWatchTimer,
-      Position location,
-      BikeModel bikeModel,
-      String time,
-      String nameParking,
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      TextEditingController codeBike,
-      GlobalKey formKey) async {
-    final pr = ProgressDialog(buildContext, type: ProgressDialogType.Normal);
-    var percentage = 0;
-    int money;
-    await DatabaseService.getMoneyCard(1).then((value) {
-      value.once().then((snapshot) {
-        money = snapshot.value;
-      });
-    });
-    return showDialog(
-        context: buildContext,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Bạn muốn thuê xe này? Vui lòng "
-                "nhập mã số xe tương ứng và tài khoản"
-                " sẽ tự động bị trừ tiền cọc: "),
-            content: Form(
-              key: formKey,
-              child: TextFormField(
-                validator: validatorCodeBike,
-                decoration: const InputDecoration(
-                    hintText: "Nhập mã số xe...", labelText: "Mã xe:"),
-                autofocus: true,
-                controller: codeBike,
-              ),
-            ),
-            actions: [
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(buildContext).pop();
-                  },
-                  child: const Text("Huỷ")),
-              FlatButton(
-                  onPressed: () async {
-                    if (codeBike.text == bikeModel.codeBike) {
-                      await pr.show();
-                      // ignore: lines_longer_than_80_chars
-                      await Future.delayed(const Duration(seconds: 3))
-                          .then((value) {
-                        percentage = percentage + 30;
-                        // ignore: lines_longer_than_80_chars
-                        pr.update(
-                            progress: percentage.toDouble(),
-                            message: "Vui lòng đợi...");
-                        if (bikeModel.deposit <= money) {
-                          //update trạng thái xe thành chưa sẵn sàng
-                          DatabaseService.updateStateActionBike(
-                              bikeModel.bikeId, "Chưa Sẵn Sàng");
-                          _stopWatchTimer.onExecute.add(StopWatchExecute.start);
-                          // trừ tiền cọc vào tài khoản
-                          DatabaseService.updateMoneyCard(
-                              money - bikeModel.deposit);
-                          // upload thông báo thuê xe thành công
-                          DatabaseService.uploadNotiActionBike(
-                                  bikeId: bikeModel.bikeId,
-                                  parkingId: bikeModel.parkingId,
-                                  codeBike: bikeModel.codeBike,
-                                  typeBike: bikeModel.typeBike,
-                                  nameParking: nameParking,
-                                  time: time,
-                                  action: "Thuê")
-                              .whenComplete(() async {
-                            await Future.delayed(const Duration(seconds: 2))
-                                .then((value) {
-                              pr.hide();
-                              percentage = 0;
-                            }).whenComplete(() async {
-                              //Gửi thông báo thuê xe thành công cho người dùng
-                              await _showNotificationWithDefaultSound(
-                                  flutterLocalNotificationsPlugin,
-                                  "Thuê ${bikeModel.typeBike} thành công",
-                                  "Tên bãi xe: $nameParking "
-                                      "- Mã xe: ${bikeModel.codeBike}");
-                              // Chuyển sang giao diện Bản đồ Thuê Xe
-                              await Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => RentBike(
-                                          _stopWatchTimer,
-                                          location,
-                                          bikeModel,
-                                          flutterLocalNotificationsPlugin)),
-                                  (route) => false);
-                            });
-                          });
-                        } else {
-                          //Hiện toast báo người dùng k đủ tiền cọc xe
-                          Future.delayed(const Duration(seconds: 2))
-                              .then((value) {
-                            pr.hide();
-                            percentage = 0;
-                          }).whenComplete(() {
-                            alertDialogNotiStateBike(buildContext,
-                                "Thẻ không đủ tiền để trả cọc xe");
-                          });
-                        }
-                      });
-                    } else {
-                      //Hiện toast báo người dùng nhập sai mã xe
-                      await alertDialogNotiStateBike(
-                          buildContext, "Nhập lại mã số xe");
-                    }
-                  },
-                  child: const Text("Thuê ngay"))
-            ],
-          );
-        });
   }
 
 // Trả về toast thông báo về giao dịch của người dùng
@@ -266,26 +153,6 @@ class Service {
           style: simpleTextFieldStyle(Colors.black, 16, FontWeight.normal)),
       trailing: const IconButton(
           icon: Icon(Icons.arrow_forward_ios), onPressed: null),
-    );
-  }
-
-// Hàm trả về thông báo cho người dùng
-  static Future<void> _showNotificationWithDefaultSound(
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      String nameNotification,
-      String description) async {
-    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'your channel id', 'your channel name', 'your channel description',
-        importance: Importance.Max, priority: Priority.High);
-    const iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    const platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      nameNotification,
-      description,
-      platformChannelSpecifics,
-      payload: 'Default_Sound',
     );
   }
 

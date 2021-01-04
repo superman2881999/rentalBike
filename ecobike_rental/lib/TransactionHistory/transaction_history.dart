@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../Helper/widget.dart';
 import '../IntroApp/splash_screen.dart';
-import '../Model/history_transaction_model.dart';
-import 'database.dart';
-import 'widget.dart';
+import 'transaction_history_controller.dart';
 
 ///Trả về 1 instance _TransactionHistoryState
 class TransactionHistory extends StatefulWidget {
@@ -13,39 +12,13 @@ class TransactionHistory extends StatefulWidget {
 
 ///Lớp quản lý danh sách lịch sử giao dịch
 class _TransactionHistoryState extends State<TransactionHistory> {
+  TransactionHistoryController transactionHistoryController =
+      TransactionHistoryController();
   @override
   void initState() {
-    // Lấy total time và total money
-    DatabaseService.getTotalMoneyAndTime().then((value) {
-      value.once().then((snapshot) {
-        SplashScreen.totalMoney = snapshot.value["totalMoney"];
-        SplashScreen.totalTime = snapshot.value["totalTime"];
-      });
-    });
-    //Lấy danh sách lịch sử giao dịch
-    DatabaseService.getListHistoryTransaction().then((value) {
-      SplashScreen.listHistoryTransaction.clear();
-      SplashScreen.listIsCheck.clear();
-      value.once().then((snapshot) {
-        final Map<dynamic, dynamic> values = snapshot.value;
-        // ignore: cascade_invocations
-        values?.forEach((key, values) {
-          SplashScreen.listHistoryTransaction.add(HistoryTransaction(
-              userId: values["userId"],
-              bikeId: values["bikeId"],
-              transactionName: values["transactionName"],
-              timeRentBike: values["timeRentBike"],
-              paymentMoney: values["paymentMoney"],
-              dateRentBike: values["dateRentBike"],
-              licensePlate: values["licensePlate"],
-              typeBike: values["typeBike"]));
-        });
-        // ignore: lines_longer_than_80_chars
-        for (var i = 0; i < SplashScreen.listHistoryTransaction.length; i++) {
-          SplashScreen.listIsCheck.add({i: false});
-        }
-      });
-    });
+    transactionHistoryController.getTotalMoneyAndTime();
+    // ignore: cascade_invocations
+    transactionHistoryController.getListHistoryTransaction();
     super.initState();
   }
 
@@ -53,7 +26,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height / 5;
     return Scaffold(
-      appBar: Service.appBarMain(const Text("Lịch sử thuê xe"), context),
+      appBar: Helper.appBarMain(const Text("Lịch sử thuê xe"), context),
       body: Column(
         children: [
           SizedBox(
@@ -68,7 +41,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     child: Text(
                       "Lịch sử thuê xe",
                       // ignore: lines_longer_than_80_chars
-                      style: Service.simpleTextFieldStyle(
+                      style: Helper.simpleTextFieldStyle(
                           Colors.black, 23, FontWeight.bold),
                     ),
                   ),
@@ -82,15 +55,15 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                             children: [
                               if (SplashScreen.totalMoney == null)
                                 Text("0",
-                                    style: Service.simpleTextFieldStyle(
+                                    style: Helper.simpleTextFieldStyle(
                                         Colors.black, 15, FontWeight.bold))
                               else
                                 Text("${SplashScreen.totalMoney}",
-                                    style: Service.simpleTextFieldStyle(
+                                    style: Helper.simpleTextFieldStyle(
                                         Colors.black, 15, FontWeight.bold)),
                               Expanded(
                                   child: Text("Tổng tiền",
-                                      style: Service.simpleTextFieldStyle(
+                                      style: Helper.simpleTextFieldStyle(
                                           Colors.black, 15, FontWeight.normal)))
                             ],
                           ),
@@ -98,15 +71,15 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                             children: [
                               if (SplashScreen.totalTime == null)
                                 Text("0 giờ 0 phút",
-                                    style: Service.simpleTextFieldStyle(
+                                    style: Helper.simpleTextFieldStyle(
                                         Colors.black, 15, FontWeight.bold))
                               else
                                 Text("${SplashScreen.totalTime}",
-                                    style: Service.simpleTextFieldStyle(
+                                    style: Helper.simpleTextFieldStyle(
                                         Colors.black, 15, FontWeight.bold)),
                               Expanded(
                                   child: Text("Tổng thời gian",
-                                      style: Service.simpleTextFieldStyle(
+                                      style: Helper.simpleTextFieldStyle(
                                           Colors.black, 15, FontWeight.normal)))
                             ],
                           )
@@ -180,7 +153,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                             // ignore: lines_longer_than_80_chars
                                                             SplashScreen.listIsCheck[
                                                                     index][
-                                                            // ignore: lines_longer_than_80_chars
+                                                                // ignore: lines_longer_than_80_chars
                                                                 index] = !SplashScreen
                                                                     // ignore: lines_longer_than_80_chars
                                                                     .listIsCheck[
@@ -197,7 +170,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                             // ignore: lines_longer_than_80_chars
                                                             SplashScreen.listIsCheck[
                                                                     index][
-                                                            // ignore: lines_longer_than_80_chars
+                                                                // ignore: lines_longer_than_80_chars
                                                                 index] = !SplashScreen
                                                                     // ignore: lines_longer_than_80_chars
                                                                     .listIsCheck[
@@ -231,9 +204,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                         Text("Thời gian thuê",
                                                             style:
                                                                 // ignore: lines_longer_than_80_chars
-                                                            Service.simpleTextFieldStyle(
-                                                                    Colors
-                                                                        .black,
+                                                                Helper.simpleTextFieldStyle(
+                                                                  // ignore: lines_longer_than_80_chars
+                                                                    Colors.black,
                                                                     16,
                                                                     FontWeight
                                                                         // ignore: lines_longer_than_80_chars
@@ -247,9 +220,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                                 .timeRentBike,
                                                             style:
                                                                 // ignore: lines_longer_than_80_chars
-                                                            Service.simpleTextFieldStyle(
-                                                                    Colors
-                                                                        .black,
+                                                                Helper.simpleTextFieldStyle(
+                                                                  // ignore: lines_longer_than_80_chars
+                                                                    Colors.black,
                                                                     16,
                                                                     FontWeight
                                                                         // ignore: lines_longer_than_80_chars
@@ -267,9 +240,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                             // ignore: lines_longer_than_80_chars
                                                             style:
                                                                 // ignore: lines_longer_than_80_chars
-                                                            Service.simpleTextFieldStyle(
-                                                                    Colors
-                                                                        .black,
+                                                                Helper.simpleTextFieldStyle(
+                                                                  // ignore: lines_longer_than_80_chars
+                                                                    Colors.black,
                                                                     16,
                                                                     FontWeight
                                                                         // ignore: lines_longer_than_80_chars
@@ -282,9 +255,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                                 .typeBike,
                                                             style:
                                                                 // ignore: lines_longer_than_80_chars
-                                                            Service.simpleTextFieldStyle(
-                                                                    Colors
-                                                                        .black,
+                                                                Helper.simpleTextFieldStyle(
+                                                                  // ignore: lines_longer_than_80_chars
+                                                                    Colors.black,
                                                                     16,
                                                                     FontWeight
                                                                         // ignore: lines_longer_than_80_chars
@@ -302,9 +275,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                         Text("Biển số xe",
                                                             style:
                                                                 // ignore: lines_longer_than_80_chars
-                                                            Service.simpleTextFieldStyle(
-                                                                    Colors
-                                                                        .black,
+                                                                Helper.simpleTextFieldStyle(
+                                                                  // ignore: lines_longer_than_80_chars
+                                                                    Colors.black,
                                                                     16,
                                                                     FontWeight
                                                                         // ignore: lines_longer_than_80_chars
@@ -318,9 +291,9 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                                                 .licensePlate,
                                                             style:
                                                                 // ignore: lines_longer_than_80_chars
-                                                            Service.simpleTextFieldStyle(
-                                                                    Colors
-                                                                        .black,
+                                                                Helper.simpleTextFieldStyle(
+                                                                  // ignore: lines_longer_than_80_chars
+                                                                    Colors.black,
                                                                     16,
                                                                     FontWeight
                                                                         // ignore: lines_longer_than_80_chars

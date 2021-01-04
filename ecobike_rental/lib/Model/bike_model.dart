@@ -11,14 +11,14 @@ class BikeModel {
       this.codeBike,
       this.deposit,
       this.licensePlate});
-  int parkingId;
-  int bikeId;
-  String codeBike;
-  Map<dynamic,dynamic> urlImage;
-  int deposit;
-  String licensePlate;
-  int batteryCapacity;
-  String typeBike;
-  String nameBike;
-  String state;
+  final int parkingId;
+  final int bikeId;
+  final String codeBike;
+  final Map<dynamic,dynamic> urlImage;
+  final int deposit;
+  final String licensePlate;
+  final int batteryCapacity;
+  final String typeBike;
+  final String nameBike;
+  final String state;
 }

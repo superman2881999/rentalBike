@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../Service/widget.dart';
-import 'slider_bike.dart';
+import '../Helper/widget.dart';
 import 'slider_double_bike.dart';
 import 'slider_electric_bike.dart';
+import 'slider_single_bike.dart';
 
 ///Trả về 1 instance của _ParkingDetailState
 class ParkingDetail extends StatefulWidget {
@@ -17,6 +17,7 @@ class ParkingDetail extends StatefulWidget {
   @override
   _ParkingDetailState createState() => _ParkingDetailState();
 }
+
 ///Trả về danh sách
 class _ParkingDetailState extends State<ParkingDetail> {
   //Khai báo biến lưu vị trí hiện tại của màn hình
@@ -27,17 +28,21 @@ class _ParkingDetailState extends State<ParkingDetail> {
     // Chứa các widget màn hình loại xe để người dùng chọn
     final widgetOptions = [
       SliderBike(
-        parkingId: widget.parkingId,
-        nameParking: widget.nameParking,
-      ),
+          parkingId: widget.parkingId,
+          nameParking: widget.nameParking,
+          typeBike: "Xe Đạp"),
       SliderElectricBike(
-          parkingId: widget.parkingId, nameParking: widget.nameParking),
+          parkingId: widget.parkingId,
+          nameParking: widget.nameParking,
+          typeBike: "Xe Đạp Điện"),
       SliderDoubleBike(
-          parkingId: widget.parkingId, nameParking: widget.nameParking),
+          parkingId: widget.parkingId,
+          nameParking: widget.nameParking,
+          typeBike: "Xe Đạp Đôi"),
     ];
     return Scaffold(
         appBar:
-        Service.appBarMain(const Text("Danh sách xe trong bãi"), context),
+            Helper.appBarMain(const Text("Danh sách xe trong bãi"), context),
         //Hiển thị các lựa chọn cho người dùng
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(color: Colors.redAccent),

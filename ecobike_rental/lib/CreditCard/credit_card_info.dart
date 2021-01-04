@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
+import '../Helper/constant.dart';
+import '../Helper/database.dart';
+import '../Helper/widget.dart';
 import '../IntroApp/splash_screen.dart';
 import '../Model/credit_card_model.dart';
-import 'database.dart';
-import 'widget.dart';
+import '../interbank/interbank.dart';
 
 ///Trả về 1 instance _CreditCardInfoState
 class CreditCardInfo extends StatefulWidget {
@@ -15,24 +16,6 @@ class CreditCardInfo extends StatefulWidget {
 
 /// Lớp quản lý thông tin của thẻ tín dụng
 class _CreditCardInfoState extends State<CreditCardInfo> {
-  static const platform = MethodChannel("Transaction");
-  // call api reset tiền trong thẻ
-  Future<String> resetMoney() async {
-    String value;
-    try {
-      value = await platform.invokeMethod('ResetMoney', {
-        "command": "refund",
-        "cardCode": "118609_group5_2020",
-        "owner": "Group 5",
-        "cvvCode": "271",
-        "dateExpired": "1125",
-      });
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-    return value;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +41,7 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
       });
     });
     return Scaffold(
-      appBar: Service.appBarMain(const Text("Thẻ của tôi"), context),
+      appBar: Helper.appBarMain(const Text("Thẻ của tôi"), context),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +56,7 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                   padding: const EdgeInsets.all(20),
                   child: Text(
                     "Số dư tài khoản",
-                    style: Service.simpleTextFieldStyle(
+                    style: Helper.simpleTextFieldStyle(
                         Colors.white70, 15, FontWeight.normal),
                   ),
                 ),
@@ -82,7 +65,7 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
                         '0',
-                        style: Service.simpleTextFieldStyle(
+                        style: Helper.simpleTextFieldStyle(
                             Colors.white, 35, FontWeight.normal),
                       ))
                 else
@@ -90,7 +73,7 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
                         "${SplashScreen.creditCardModelInfo.amountMoney}",
-                        style: Service.simpleTextFieldStyle(
+                        style: Helper.simpleTextFieldStyle(
                             Colors.white, 35, FontWeight.normal),
                       )),
                 const Divider(
@@ -147,8 +130,8 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                                   ],
                                 ),
                               ),
-                              Text(SplashScreen.creditCardModelInfo.codeCard,
-                                  style: const TextStyle(
+                              const Text(Constant.codeCard,
+                                  style: TextStyle(
                                       color: Colors.white,
                                       letterSpacing: 2,
                                       fontSize: 25)),
@@ -160,13 +143,13 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                                     children: [
                                       // ignore: lines_longer_than_80_chars
                                       Text("CHỦ THẺ",
-                                          style: Service.simpleTextFieldStyle(
+                                          style: Helper.simpleTextFieldStyle(
                                               Colors.white38,
                                               15,
                                               FontWeight.normal)),
                                       // ignore: lines_longer_than_80_chars
-                                      Text("Group 5",
-                                          style: Service.simpleTextFieldStyle(
+                                      Text(Constant.owner,
+                                          style: Helper.simpleTextFieldStyle(
                                               Colors.white70,
                                               17,
                                               FontWeight.normal))
@@ -177,16 +160,13 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                                     children: [
                                       // ignore: lines_longer_than_80_chars
                                       Text("CVV",
-                                          style: Service.simpleTextFieldStyle(
+                                          style: Helper.simpleTextFieldStyle(
                                               Colors.white38,
                                               15,
                                               FontWeight.normal)),
                                       // ignore: lines_longer_than_80_chars
-                                      Text(
-                                          SplashScreen
-                                              .creditCardModelInfo.cvvCode
-                                              .toString(),
-                                          style: Service.simpleTextFieldStyle(
+                                      Text(Constant.cvvCode.toString(),
+                                          style: Helper.simpleTextFieldStyle(
                                               Colors.white70,
                                               17,
                                               FontWeight.normal))
@@ -196,15 +176,13 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                                     children: [
                                       // ignore: lines_longer_than_80_chars
                                       Text("HẠN SỬ DỤNG",
-                                          style: Service.simpleTextFieldStyle(
+                                          style: Helper.simpleTextFieldStyle(
                                               Colors.white38,
                                               15,
                                               FontWeight.normal)),
                                       // ignore: lines_longer_than_80_chars
-                                      Text(
-                                          SplashScreen
-                                              .creditCardModelInfo.dateExpired,
-                                          style: Service.simpleTextFieldStyle(
+                                      Text(Constant.dateExpired,
+                                          style: Helper.simpleTextFieldStyle(
                                               Colors.white70,
                                               17,
                                               FontWeight.normal))
@@ -232,7 +210,7 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
                                 color: Colors.white,
                               ),
                               Text("Thêm liên kết",
-                                  style: Service.simpleTextFieldStyle(
+                                  style: Helper.simpleTextFieldStyle(
                                       Colors.white, 17, FontWeight.normal))
                             ],
                           ))),
@@ -248,7 +226,7 @@ class _CreditCardInfoState extends State<CreditCardInfo> {
         backgroundColor: Colors.redAccent,
         tooltip: "Làm mới tiền",
         onPressed: () {
-          resetMoney();
+          Interbank.resetMoney();
           DatabaseService.updateMoneyCard(1000000);
         },
         child: const Icon(Icons.autorenew),
