@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'IntroApp/splash_screen.dart';
+import 'view/intro_app/splash_screen.dart';
 
 /// Khi chạy project thì đầu tiên sẽ chạy vào hàm main()
 // ignore: avoid_void_async

@@ -1,3 +1,4 @@
+import 'package:EcobikeRental/interbank/interbank_interface.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -7,18 +8,19 @@ import '../Helper/constant.dart';
 import '../Helper/widget.dart';
 import '../Model/bike_model.dart';
 
-class Interbank {
+class Interbank extends InterbankInterFace {
   // Hàm call api, trả về errorCode
-  static Future<String> transaction(
+  @override
+  Future<String> transaction(
       {int amount,
-        String typeBike,
-        ProgressDialog progressDialog,
-        BuildContext context,
-        String nameParking,
-        BikeModel bikeModel,
-        StopWatchTimer stopWatchTimer,
-        // ignore: type_annotate_public_apis
-        value}) async {
+      String typeBike,
+      ProgressDialog progressDialog,
+      BuildContext context,
+      String nameParking,
+      BikeModel bikeModel,
+      StopWatchTimer stopWatchTimer,
+      // ignore: type_annotate_public_apis
+      value}) async {
     String value;
     try {
       //Hỗ trợ call sang java
@@ -38,8 +40,10 @@ class Interbank {
     }
     return value;
   }
+
   // call api reset tiền trong thẻ
-  static Future<void> resetMoney() async {
+  @override
+  Future<void> resetMoney() async {
     try {
       await Constant.platform.invokeMethod('resetMoney', {
         "command": "refund",
