@@ -1,14 +1,13 @@
-import 'package:EcobikeRental/interbank/interbank_interface.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-import '../Helper/constant.dart';
-import '../Helper/widget.dart';
-import '../Model/bike_model.dart';
+import '../helper/constant.dart';
+import '../helper/widget.dart';
+import 'interbank_interface.dart';
 
-class Interbank extends InterbankInterFace {
+class Interbank extends PaymentInterface {
   // Hàm call api, trả về errorCode
   @override
   Future<String> transaction(
@@ -17,7 +16,6 @@ class Interbank extends InterbankInterFace {
       ProgressDialog progressDialog,
       BuildContext context,
       String nameParking,
-      BikeModel bikeModel,
       StopWatchTimer stopWatchTimer,
       // ignore: type_annotate_public_apis
       value}) async {

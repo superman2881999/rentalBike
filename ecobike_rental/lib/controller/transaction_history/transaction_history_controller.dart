@@ -1,5 +1,5 @@
-import '../../Helper/database.dart';
-import '../../Model/history_transaction_model.dart';
+import '../../helper/database.dart';
+import '../../model/history_transaction_model.dart';
 import '../../view/intro_app/splash_screen.dart';
 
 class TransactionHistoryController {

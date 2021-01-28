@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../Helper/drawer.dart';
-import '../../Helper/widget.dart';
-import '../../Model/parking_model.dart';
+import '../../helper/drawer.dart';
+import '../../helper/widget.dart';
+import '../../model/parking_model.dart';
 import '../intro_app/splash_screen.dart';
 import 'parking_detail.dart';
 

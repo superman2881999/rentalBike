@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../Helper/widget.dart';
-import '../../Model/bike_model.dart';
 import '../../controller/station/slider_bike_controller.dart';
+import '../../helper/widget.dart';
+import '../../model/bike_model.dart';
 import '../intro_app/splash_screen.dart';
 
 ///Trả về 1 instance của _SliderElectricBikeState

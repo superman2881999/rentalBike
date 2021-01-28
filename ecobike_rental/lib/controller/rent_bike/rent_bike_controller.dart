@@ -5,15 +5,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-import '../../Helper/database.dart';
-import '../../Helper/widget.dart';
-import '../../Model/bike_model.dart';
+import '../../helper/database.dart';
+import '../../helper/widget.dart';
 import '../../interbank/interbank.dart';
+import '../../interbank/interbank_interface.dart';
+import '../../model/bike_model.dart';
 import '../../view/return_bike/return_bike.dart';
-import '../Notification/notification_controller.dart';
+import '../notification/notification_controller.dart';
 
 class RentBikeController {
-  Interbank interbank = Interbank();
+  PaymentInterface paymentInterface = Interbank();
   //Xử lý danh sách điểm trả
    void handleListMarkers({
     bool isReturnBike,
@@ -36,30 +37,9 @@ class RentBikeController {
     }
   }
 
-  //Xử lý tiền thuê xe theo yêu cầu
-   int calculatorMoney(int minuteTime,String typeBike) {
-    double result;
-    if (minuteTime > 10) {
-      if (minuteTime >= 40) {
-        result = 10000 + ((minuteTime - 40) / 15 + 1) * 3000;
-      } else {
-        result = 10000;
-      }
-    } else {
-      result = 0;
-    }
-    if(typeBike == "Xe Đạp"){
-      return result.round();
-    }
-    else{
-      return (result*1.5).round();
-    }
-  }
-
   //Xử lý logic giao dịch trả xe
    Future<void> handleTransaction(
       {int amount,
-      String typeBike,
       ProgressDialog progressDialog,
       BuildContext context,
       String nameParking,
@@ -70,14 +50,13 @@ class RentBikeController {
       result}) async {
     String value;
     if (amount > 10) {
-      await interbank.transaction(
+      await paymentInterface.transaction(
               amount: amount,
-              typeBike: typeBike,
+              typeBike: bikeModel.typeBike,
               progressDialog: progressDialog,
               context: context,
               nameParking: nameParking,
               stopWatchTimer: stopWatchTimer,
-              bikeModel: bikeModel,
               value: result)
           .then((val) {
         value = val;

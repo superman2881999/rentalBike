@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../Helper/widget.dart';
+import '../../helper/widget.dart';
 import 'slider_double_bike.dart';
 import 'slider_electric_bike.dart';
 import 'slider_single_bike.dart';

@@ -1,4 +1,4 @@
-import '../../Helper/database.dart';
+import '../../helper/database.dart';
 import '../../view/intro_app/splash_screen.dart';
 
 

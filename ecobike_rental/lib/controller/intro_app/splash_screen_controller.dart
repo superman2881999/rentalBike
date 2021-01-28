@@ -1,21 +1,21 @@
 import 'package:geolocator/geolocator.dart';
 
-import '../../Helper/database.dart';
-import '../../Model/bike_model.dart';
-import '../../Model/credit_card_model.dart';
-import '../../Model/history_transaction_model.dart';
-import '../../Model/parking_model.dart';
+import '../../helper/database.dart';
+import '../../model/bike_model.dart';
+import '../../model/credit_card_model.dart';
+import '../../model/history_transaction_model.dart';
+import '../../model/parking_model.dart';
 import '../../view/intro_app/splash_screen.dart';
 
 class SplashScreenController {
   //Trả về vị trí của người dùng
-   Future<void> getUserLocation() async {
+  static Future<void> getUserLocation() async {
     await Geolocator.getCurrentPosition().then((currloc) {
       SplashScreen.currentLocation = currloc;
     });
   }
   // Lấy danh sách bãi xe
-  void getListParking() {
+ static void getListParking() {
     DatabaseService.getListParking().then((values) {
       SplashScreen.listParking.clear();
       values.once().then((snapshot) {
@@ -28,7 +28,7 @@ class SplashScreenController {
   }
 
   // Lấy thông tin thẻ
-  void getCard() {
+  static void getCard() {
     DatabaseService.getCard(1).then((value) {
       value.once().then((snapshot) {
         final Map<dynamic, dynamic> values = snapshot.value;
@@ -46,12 +46,12 @@ class SplashScreenController {
   }
 
   // Lấy danh sách thông báo
-  void getListNotification() {
+  static void getListNotification() {
     DatabaseService.getListNotification();
   }
 
   // Lấy total time và total money
-  void getTotalMoneyAndTime() {
+  static void getTotalMoneyAndTime() {
     DatabaseService.getTotalMoneyAndTime().then((value) {
       value.once().then((snapshot) {
         SplashScreen.totalMoney = snapshot.value["totalMoney"];
@@ -61,7 +61,7 @@ class SplashScreenController {
   }
 
   // Lấy danh sách giao dịch thuê xe
-  void getListHistoryTransaction() {
+  static void getListHistoryTransaction() {
     DatabaseService.getListHistoryTransaction().then((v) {
       SplashScreen.listHistoryTransaction.clear();
       SplashScreen.listIsCheck.clear();
@@ -87,7 +87,7 @@ class SplashScreenController {
   }
 
   // Lấy danh sách xe trong bãi
-  void getListBike() {
+  static void getListBike() {
     DatabaseService.getListBike().then((value){
       SplashScreen.listSingleBike.clear();
       SplashScreen.listElectricBike.clear();

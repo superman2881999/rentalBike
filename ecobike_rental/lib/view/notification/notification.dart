@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../Helper/widget.dart';
-import '../../Model/notification_model.dart';
+import '../../helper/widget.dart';
+import '../../model/notification_model.dart';
 import '../intro_app/splash_screen.dart';
 import 'custom_clip_path.dart';
 

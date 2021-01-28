@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../../Model/bike_model.dart';
-import '../../Model/credit_card_model.dart';
-import '../../Model/history_transaction_model.dart';
-import '../../Model/notification_model.dart';
-import '../../Model/parking_model.dart';
 import '../../controller/intro_app/splash_screen_controller.dart';
+import '../../model/bike_model.dart';
+import '../../model/credit_card_model.dart';
+import '../../model/history_transaction_model.dart';
+import '../../model/notification_model.dart';
+import '../../model/parking_model.dart';
 import 'droplet_loader/automated_animator.dart';
 import 'droplet_loader/wave_loading_bubble.dart';
 import 'landing.dart';
@@ -39,25 +39,26 @@ class SplashScreen extends StatefulWidget {
 ///Trả về kết quả lấy được từ server vào các biến đã khai báo ở class trên
 class _SplashScreenState extends State<SplashScreen> {
 
-  SplashScreenController splashScreenController = SplashScreenController();
+ // SplashScreenController splashScreenController = SplashScreenController();
 
   //Hàm khởi tạo chạy khi class đc tạo
   @override
   void initState() {
     super.initState();
-    splashScreenController.getUserLocation();
+    SplashScreenController.getUserLocation();
     // ignore: cascade_invocations
-    splashScreenController.getListParking();
+    SplashScreenController.getListParking();
+
     // ignore: cascade_invocations
-    splashScreenController.getCard();
+    SplashScreenController.getCard();
     // ignore: cascade_invocations
-    splashScreenController.getListNotification();
+    SplashScreenController.getListNotification();
     // ignore: cascade_invocations
-    splashScreenController.getTotalMoneyAndTime();
+    SplashScreenController.getTotalMoneyAndTime();
     // ignore: cascade_invocations
-    splashScreenController.getListHistoryTransaction();
+    SplashScreenController.getListHistoryTransaction();
     // ignore: cascade_invocations
-    splashScreenController.getListBike();
+    SplashScreenController.getListBike();
     //Sau 10 giây thì sẽ chuyển hướng vào màn hình giới thiệu app
     Timer(
         const Duration(seconds: 10),

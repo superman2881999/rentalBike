@@ -2,86 +2,857 @@
   "bikes" : {
     "bike1" : {
       "bikeId" : 1,
-      "codeBike" : "123 3243 3244 232",
-      "deposit" : "400,000",
+      "codeBike" : "123 3",
+      "colorBike" : {
+        "urlImage1" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedap%2Fxedap1%2Fxedaploai1den.jpg?alt=media&token=e0d9e278-1bb3-435a-8f67-70b9a48cc71f",
+        "urlImage2" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedap%2Fxedap1%2Fxedaploai1trang.jpg?alt=media&token=a2fc080f-b2a5-4b15-ae94-ed6774ad534c",
+        "urlImage3" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedap%2Fxedap1%2Fxedaploai1xanh.jpg?alt=media&token=70932d07-6ac8-4d4c-a044-43c3e33ded3c"
+      },
+      "deposit" : 400000,
       "nameBike" : "Xe đạp mini Nhật",
       "parkingId" : 1,
-      "state" : "SanSang",
-      "typeBike" : "XeDap"
+      "state" : "Sẵn Sàng",
+      "typeBike" : "Xe Đạp"
     },
     "bike2" : {
       "batteryCapacity" : 70,
       "bikeId" : 2,
-      "codeBike" : "123 2432 34 242 33",
-      "deposit" : "700,000",
+      "codeBike" : "123",
+      "colorBike" : {
+        "urlImage1" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdien%2Fxedapdien1%2Fxe-dap-dien-ev-s9262.jpg?alt=media&token=d2bea90b-71ba-4bc5-bf22-e7139e9d41ca",
+        "urlImage2" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdien%2Fxedapdien1%2Fxe-dap-dien-ev-s9389.jpg?alt=media&token=97ac741f-52c0-4789-986c-399150b556c3",
+        "urlImage3" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdien%2Fxedapdien1%2Fxe-dap-dien-ev-s9600.jpg?alt=media&token=0e7c4757-be65-4c1b-998e-1113c7ea5517"
+      },
+      "deposit" : 700000,
       "licensePlate" : "29A2-13671",
-      "nameBike" : "Xe đạp điện X-men",
+      "nameBike" : "Xe đạp điện Nhật",
       "parkingId" : 2,
-      "state" : "ChuaSanSang",
-      "typeBike" : "XeDapDien"
+      "state" : "Sẵn Sàng",
+      "typeBike" : "Xe Đạp Điện"
     },
     "bike3" : {
       "bikeId" : 3,
-      "codeBike" : "232 34 2 83 7323",
-      "deposit" : "550,000",
+      "codeBike" : "232",
+      "colorBike" : {
+        "urlImage1" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi1%2Fxe-dap-doi-amt-49110.jpg?alt=media&token=425d9889-e1a8-42db-a9e8-9c3a2a828026",
+        "urlImage2" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi1%2Fxe-dap-doi-amt-49141.jpg?alt=media&token=928308f4-62d6-461a-a1da-ecd3f5704ef9",
+        "urlImage3" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi1%2Fxe-dap-doi-amt-49451.jpg?alt=media&token=89ef5b75-a690-4ce5-8d7d-e2722a0fa296",
+        "urlImage4" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi1%2Fxe-dap-doi-amt-49890.jpg?alt=media&token=b81fd703-9a24-40c5-8f9f-092f22c31486"
+      },
+      "deposit" : 550000,
       "nameBike" : "Xe đạp đôi Nhật",
+      "parkingId" : 3,
+      "state" : "Sẵn Sàng",
+      "typeBike" : "Xe Đạp Đôi"
+    },
+    "bike4" : {
+      "bikeId" : 1,
+      "codeBike" : "12345",
+      "colorBike" : {
+        "urlImage1" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi2%2Fxe-dap-doi-pax-1170.jpg?alt=media&token=0dff0e2a-7cd5-47c2-b066-c673e4d604fd",
+        "urlImage2" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi2%2Fxe-dap-doi-pax-1337.jpg?alt=media&token=90e35294-c845-43a6-ab1b-b5d8ca64c1bc",
+        "urlImage3" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi2%2Fxe-dap-doi-pax-1744.jpg?alt=media&token=b38c4f7f-f48d-40d4-a905-a75e8173b0a9",
+        "urlImage4" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdoi%2Fxedapdoi2%2Fxe-dap-doi-pax-1852.jpg?alt=media&token=06131ae8-0710-4486-b7b8-cde1a8359e0d"
+      },
+      "deposit" : 550000,
+      "nameBike" : "Xe đạp đôi Tàu",
+      "parkingId" : 1,
+      "state" : "Sẵn Sàng",
+      "typeBike" : "Xe Đạp Đôi"
+    },
+    "bike5" : {
+      "batteryCapacity" : 90,
+      "bikeId" : 5,
+      "codeBike" : "123456",
+      "colorBike" : {
+        "urlImage1" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdien%2Fxedapdien2%2Fxe-dap-dien-vnbike-v4470.jpg?alt=media&token=664a5a67-eef0-49b2-b7ed-55339d2944f3",
+        "urlImage2" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdien%2Fxedapdien2%2Fxe-dap-dien-vnbike-v4614.jpg?alt=media&token=a0b7582d-2447-464a-a3df-fb146d2439b3",
+        "urlImage3" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedapdien%2Fxedapdien2%2Fxe-dap-dien-vnbike-v4638.jpg?alt=media&token=cd86700b-6ece-4ad8-b5d2-aac6163bf3ae"
+      },
+      "deposit" : 700000,
+      "licensePlate" : "29A2-13673",
+      "nameBike" : "Xe đạp điện Tàu",
+      "parkingId" : 3,
+      "state" : "Sẵn Sàng",
+      "typeBike" : "Xe Đạp Điện"
+    },
+    "bike6" : {
+      "bikeId" : 6,
+      "codeBike" : "23 432",
+      "colorBike" : {
+        "urlImage1" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedap%2Fxedap2%2Fxedaploai2xanh.jpg?alt=media&token=1f972af4-ea19-4ac4-8bfd-5bad0907b218",
+        "urlImage2" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedap%2Fxedap2%2Fxedaploai2trang.jpg?alt=media&token=86a286a5-93cf-4875-86b1-76595b743e73",
+        "urlImage3" : "https://firebasestorage.googleapis.com/v0/b/rentalbike-62ea8.appspot.com/o/xedap%2Fxedap2%2Fxedaploai2den.jpg?alt=media&token=b4728714-6714-48a7-b4a4-ce0d61bf8ebd"
+      },
+      "deposit" : 400000,
+      "nameBike" : "Xe đạp mini Tàu",
       "parkingId" : 2,
-      "state" : "SanSang",
-      "typeBike" : "XeDapDoi"
+      "state" : "Sẵn Sàng",
+      "typeBike" : "Xe Đạp"
     }
   },
   "creditCards" : {
     "creditCard1" : {
-      "amountMoney" : "1,000,000",
-      "appCode" : "CWr2Fkgfdgdf=",
+      "amountMoney" : 886000,
+      "appCode" : "CWr2Fgjdclc=",
       "cardId" : 1,
-      "codeCard" : "12343 32432 32432",
-      "cvvCode" : 101,
-      "dateExpired" : "12/12/2020 00:00:00",
-      "secretKey" : "BLSSBlfewdgf=",
+      "codeCard" : "118609_group5_2020",
+      "cvvCode" : 271,
+      "dateExpired" : "1125",
+      "secretKey" : "BLSSBlwOmxo=",
       "userId" : 1
     }
   },
-  "notification" : {
-    "notification1" : {
+  "notifications" : {
+    "-MOB7h8fac-CIl09NMyL" : {
       "bikeId" : 2,
-      "description" : "Bãi số 1 - Mã xe: 123 3243 3244 232",
-      "nameNotification" : "Trả xe đạp thành công",
-      "notificationId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 2432 34 242 33",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-10 17:11:51",
+      "userId" : 1
+    },
+    "-MOB7pcet2aN5eCb0aa5" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 2432 34 242 33",
+      "nameNotification" : "Trả Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-10 17:12:32",
+      "userId" : 1
+    },
+    "-MOB9eNUgbHPH1KQHxeZ" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 2432 34 242 33",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-10 17:20:25",
+      "userId" : 1
+    },
+    "-MOB9j95BtITxI4s6po8" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 2432 34 242 33",
+      "nameNotification" : "Trả Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-10 17:20:50",
+      "userId" : 1
+    },
+    "-MOC57gwBU84x9nkHGFB" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 2432 34 242 33",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-10 21:40:18",
+      "userId" : 1
+    },
+    "-MOC5DlFe1DIqTHSXBzg" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 2432 34 242 33",
+      "nameNotification" : "Trả Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-10 21:40:47",
+      "userId" : 1
+    },
+    "-MOETGnYr2RyVdqQHXTU" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3243 3244 232",
+      "nameNotification" : "Thuê Xe Đạp thành công",
       "parkingId" : 1,
-      "time" : "5 phút trước",
+      "time" : "2020-12-11 08:45:00",
+      "userId" : 1
+    },
+    "-MOETOkhxvTFPwaXVB3w" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3243 3244 232",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-11 08:45:38",
+      "userId" : 1
+    },
+    "-MOFSkI0ERxFkXDDDWFU" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3243 3244 232",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-11 13:22:20",
+      "userId" : 1
+    },
+    "-MOFSwWUNmNXAn7dLe50" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 3243 3244 232",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-11 13:23:15",
+      "userId" : 1
+    },
+    "-MOHoplkFrq_qm0Sb2xq" : {
+      "bikeId" : 3,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 232",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-12 00:22:22",
+      "userId" : 1
+    },
+    "-MOHp6Drwov8HAmwdMl8" : {
+      "bikeId" : 3,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 232",
+      "nameNotification" : "Trả Xe Đạp Đôi thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-12 00:23:43",
+      "userId" : 1
+    },
+    "-MOgPVCmUliE-SSGm_5G" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 123456",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-16 23:37:28",
+      "userId" : 1
+    },
+    "-MOgPryuXtGV-PhNPbIj" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123456",
+      "nameNotification" : "Trả Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-16 23:39:12",
+      "userId" : 1
+    },
+    "-MOgUNd5WQ2sZ-ZeS6Oc" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-16 23:58:48",
+      "userId" : 1
+    },
+    "-MOgXd-YnEpAVV7fi0P1" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 00:13:01",
+      "userId" : 1
+    },
+    "-MOgYORfVrDA4LmiHvuj" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-17 00:16:20",
+      "userId" : 1
+    },
+    "-MOgZv5-ID795_fQo66T" : {
+      "bikeId" : 3,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 232",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-17 00:22:56",
+      "userId" : 1
+    },
+    "-MOgdclGHYtBxewK-FU2" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 123456",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-17 00:43:36",
+      "userId" : 1
+    },
+    "-MOgknAz4xNNQ4KQhfan" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-17 01:14:54",
+      "userId" : 1
+    },
+    "-MOgmvYo0AMO1JCbnx4T" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 01:24:10",
+      "userId" : 1
+    },
+    "-MOl9d1kXudHZidobfp6" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 21:46:14",
+      "userId" : 1
+    },
+    "-MOlANuIrtM9hhYBH9GW" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-17 21:49:33",
+      "userId" : 1
+    },
+    "-MOlBTA0i30fxy7G5L0f" : {
+      "bikeId" : 2,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-17 21:54:16",
+      "userId" : 1
+    },
+    "-MOlGQI-GFIKl_gDq8ey" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 22:15:55",
+      "userId" : 1
+    },
+    "-MOlHhnTjJNMg6YpfPc7" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 123456",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-17 22:21:32",
+      "userId" : 1
+    },
+    "-MOlIGVhtaP1_XRo40X8" : {
+      "bikeId" : 3,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 232",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-17 22:24:00",
+      "userId" : 1
+    },
+    "-MOlJFcLKdS8hWCOZaE7" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 22:28:19",
+      "userId" : 1
+    },
+    "-MOlLOboweo2LQ06cX06" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 22:37:38",
+      "userId" : 1
+    },
+    "-MOlLvB5-A9bbkVJ9pA3" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 22:39:57",
+      "userId" : 1
+    },
+    "-MOlS34y31HGLJDt0nI5" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 23:06:45",
+      "userId" : 1
+    },
+    "-MOlS9EWt0UQUeEUUAJW" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 12345",
+      "nameNotification" : "Trả Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 23:07:17",
+      "userId" : 1
+    },
+    "-MOlSwJwCWDzdcGODobf" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 23:10:35",
+      "userId" : 1
+    },
+    "-MOlTNJjaBg3nLZy0LlN" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 3",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-17 23:12:37",
+      "userId" : 1
+    },
+    "-MOvva9Gsp9VKmzZiVUm" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-19 23:56:20",
+      "userId" : 1
+    },
+    "-MOvvs4Vgw2_04GjHlhg" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 3",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-19 23:57:42",
+      "userId" : 1
+    },
+    "-MOw8HZ8zfxLRZ3iMcfw" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-20 00:56:11",
+      "userId" : 1
+    },
+    "-MOw8MJxIliQ5UjqKu-Y" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 3",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-20 00:56:37",
+      "userId" : 1
+    },
+    "-MOxxsFyCnxE1DE63OUG" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-20 09:25:32",
+      "userId" : 1
+    },
+    "-MOxxwNSCrE8wKYw9t1s" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 12345",
+      "nameNotification" : "Trả Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-20 09:25:58",
+      "userId" : 1
+    },
+    "-MP4e8o_96DjNxSlq6wv" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-21 21:16:21",
+      "userId" : 1
+    },
+    "-MP4hBZgfAp1lZKr6_z_" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-21 21:29:31",
+      "userId" : 1
+    },
+    "-MP4kduhQJ9D5O_aFo9e" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 12345",
+      "nameNotification" : "Trả Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-21 21:44:53",
+      "userId" : 1
+    },
+    "-MP4urEcbLZusipqRT5H" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-21 22:29:21",
+      "userId" : 1
+    },
+    "-MP4w5mvFy-41oa4VdfD" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-21 22:34:54",
+      "userId" : 1
+    },
+    "-MP4w9Iz42rU_52UwdN8" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-21 22:35:02",
+      "userId" : 1
+    },
+    "-MP5kzU_6rqelpuu1ani" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 12345",
+      "nameNotification" : "Thuê Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-22 02:25:52",
+      "userId" : 1
+    },
+    "-MP5lBIb42dodx6tsRgD" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 12345",
+      "nameNotification" : "Trả Xe Đạp Đôi thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-22 02:26:51",
+      "userId" : 1
+    },
+    "-MP8pkIxmmh20upP6s4J" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-22 16:45:32",
+      "userId" : 1
+    },
+    "-MP8qD6sgpyQvBMYYYlq" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 3",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-22 16:47:40",
+      "userId" : 1
+    },
+    "-MP8qfBovx_vLsIHV-SQ" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 123456",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-22 16:49:32",
+      "userId" : 1
+    },
+    "-MP8qlfB1KWI44cCNKMb" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123456",
+      "nameNotification" : "Trả Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-22 16:50:06",
+      "userId" : 1
+    },
+    "-MP8rHQVqOZOUOXYKm8q" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 3 - Mã xe: 123456",
+      "nameNotification" : "Thuê Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-22 16:52:13",
+      "userId" : 1
+    },
+    "-MP8rMR1WLP5gwwnrvKS" : {
+      "bikeId" : 5,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123456",
+      "nameNotification" : "Trả Xe Đạp Điện thành công",
+      "parkingId" : 3,
+      "time" : "2020-12-22 16:52:41",
+      "userId" : 1
+    },
+    "-MP8zAq6J2jd2JQ0UPvR" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 1 - Mã xe: 123 3",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-22 17:26:43",
+      "userId" : 1
+    },
+    "-MP8zGx83Qsbezw9zrbt" : {
+      "bikeId" : 1,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 123 3",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 1,
+      "time" : "2020-12-22 17:27:15",
+      "userId" : 1
+    },
+    "-MP8zLUF_l7a2lT2dMBU" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-22 17:27:27",
+      "userId" : 1
+    },
+    "-MP8zOku3JtdgQVY7zOb" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-22 17:27:47",
+      "userId" : 1
+    },
+    "-MPAWYP7-pJpjWT5mtEC" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-23 00:36:22",
+      "userId" : 1
+    },
+    "-MPAWljwosJHbjVCeDcF" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-23 00:37:36",
+      "userId" : 1
+    },
+    "-MPAWq2lxMDYwU_43Ytq" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-23 00:37:47",
+      "userId" : 1
+    },
+    "-MPAX5SsbbAM9Bqp4H36" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-23 00:39:01",
+      "userId" : 1
+    },
+    "-MPAacfRPulN-eheX661" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Thuê Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-23 00:58:42",
+      "userId" : 1
+    },
+    "-MPAdcQ-b894hB3eETIF" : {
+      "bikeId" : 6,
+      "description" : "Tên bãi xe: Bãi số 2 - Mã xe: 23 432",
+      "nameNotification" : "Trả Xe Đạp thành công",
+      "parkingId" : 2,
+      "time" : "2020-12-23 01:11:55",
       "userId" : 1
     }
   },
   "parkings" : {
     "parking1" : {
-      "amountBike" : 12,
       "description" : "Cách bạn 1 km",
       "nameParking" : "Bãi số 1",
       "parkingId" : 1
     },
     "parking2" : {
-      "amountBike" : 10,
       "description" : "Cách bạn 2 km",
       "nameParking" : "Bãi số 2",
       "parkingId" : 2
+    },
+    "parking3" : {
+      "description" : "Cách bạn 4 km",
+      "nameParking" : "Bãi số 3",
+      "parkingId" : 3
     }
   },
   "transactionHistorys" : {
-    "transactionHistory1" : {
+    "-MOB80p7sY6NuLDtiE_Z" : {
       "bikeId" : 2,
-      "cardId" : 1,
-      "dateRentBike" : "11/15/2020 00:00:00",
-      "paymentMoney" : "70,000",
-      "timeRentBike" : "1h30p",
-      "transactionId" : 1,
-      "transactionName" : "Thuê xe đi Bách Khoa"
+      "dateRentBike" : "2020-12-10 17:12:34",
+      "licensePlate" : "29A2-13671",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:25",
+      "transactionName" : "Thuê Xe Đạp Điện đi Bách Khoa",
+      "typeBike" : "Xe Đạp Điện",
+      "userId" : 1
+    },
+    "-MOB9lalhXIInEXPyfcT" : {
+      "bikeId" : 2,
+      "dateRentBike" : "2020-12-10 17:20:52",
+      "licensePlate" : "29A2-13671",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:10",
+      "transactionName" : "Thuê Xe Đạp Điện đi Bách Khoa",
+      "typeBike" : "Xe Đạp Điện",
+      "userId" : 1
+    },
+    "-MOC5HUnCjN5VtTWWPYP" : {
+      "bikeId" : 2,
+      "dateRentBike" : "2020-12-10 21:40:48",
+      "licensePlate" : "29A2-13671",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:16",
+      "transactionName" : "Thuê Xe Đạp Điện đi Bách Khoa",
+      "typeBike" : "Xe Đạp Điện",
+      "userId" : 1
+    },
+    "-MOETTs9SdzfGPSYF_I8" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-11 08:45:38",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:24",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MOFSyyMl5PyLxImHLrf" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-11 13:23:16",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 14800,
+      "timeRentBike" : "00:00:42",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MOHp6urWjqG3BG9VBkb" : {
+      "bikeId" : 3,
+      "dateRentBike" : "2020-12-12 00:23:44",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 19200,
+      "timeRentBike" : "00:01:03",
+      "transactionName" : "Thuê Xe Đạp Đôi đi Bách Khoa",
+      "typeBike" : "Xe Đạp Đôi",
+      "userId" : 1
+    },
+    "-MOgPvm_17umOuIXlze3" : {
+      "bikeId" : 5,
+      "dateRentBike" : "2020-12-16 23:39:13",
+      "licensePlate" : "29A2-13673",
+      "paymentMoney" : 24200,
+      "timeRentBike" : "00:01:28",
+      "transactionName" : "Thuê Xe Đạp Điện đi Bách Khoa",
+      "typeBike" : "Xe Đạp Điện",
+      "userId" : 1
+    },
+    "-MOlTVLmxZTmZLiG97n_" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-17 23:12:38",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 27600,
+      "timeRentBike" : "00:01:39",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MOvvuZV1YxSFgAwuKwt" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-19 23:57:43",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 19400,
+      "timeRentBike" : "00:01:05",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MOw8NGisnauCheDLxOk" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-20 00:56:38",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:10",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MOxy-RN53WnNYXx_-N1" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-20 09:25:59",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:09",
+      "transactionName" : "Thuê Xe Đạp Đôi đi Bách Khoa",
+      "typeBike" : "Xe Đạp Đôi",
+      "userId" : 1
+    },
+    "-MP4l7R3j8Id_i7-wl9C" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-21 21:44:53",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 186200,
+      "timeRentBike" : "00:14:57",
+      "transactionName" : "Thuê Xe Đạp Đôi đi Bách Khoa",
+      "typeBike" : "Xe Đạp Đôi",
+      "userId" : 1
+    },
+    "-MP4w6clUqKnlIKb4td9" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-21 22:34:55",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 70000,
+      "timeRentBike" : "00:05:16",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MP5lGQ8kL_S1MOzP7SY" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-22 02:26:51",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 15400,
+      "timeRentBike" : "00:00:44",
+      "transactionName" : "Thuê Xe Đạp Đôi đi Bách Khoa",
+      "typeBike" : "Xe Đạp Đôi",
+      "userId" : 1
+    },
+    "-MP8rF-iNRhC2eoi6OQh" : {
+      "bikeId" : 5,
+      "dateRentBike" : "2020-12-22 16:52:07",
+      "licensePlate" : "29A2-13673",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:17",
+      "transactionName" : "Thuê Xe Đạp Điện đi Bách Khoa",
+      "typeBike" : "Xe Đạp Điện",
+      "userId" : 1
+    },
+    "-MP8rPtXJKxQDR81pvqY" : {
+      "bikeId" : 5,
+      "dateRentBike" : "2020-12-22 16:52:41",
+      "licensePlate" : "29A2-13673",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:11",
+      "transactionName" : "Thuê Xe Đạp Điện đi Bách Khoa",
+      "typeBike" : "Xe Đạp Điện",
+      "userId" : 1
+    },
+    "-MP8zHrl3eIzxoQ_bVAj" : {
+      "bikeId" : 1,
+      "dateRentBike" : "2020-12-22 17:27:17",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:16",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MP8zTmjtuuEpXwT2AvX" : {
+      "bikeId" : 6,
+      "dateRentBike" : "2020-12-22 17:27:49",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:00:07",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MPAWmyd8xo1W7K5N4kc" : {
+      "bikeId" : 6,
+      "dateRentBike" : "2020-12-23 00:37:36",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 16600,
+      "timeRentBike" : "00:00:50",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MPAX6cKTj044znx4syR" : {
+      "bikeId" : 6,
+      "dateRentBike" : "2020-12-23 00:39:01",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 18200,
+      "timeRentBike" : "00:01:00",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
+    },
+    "-MPAfN4vKm7a-j-bjaHW" : {
+      "bikeId" : 6,
+      "dateRentBike" : "2020-12-23 01:11:55",
+      "licensePlate" : "Không có",
+      "paymentMoney" : 10000,
+      "timeRentBike" : "00:12:56",
+      "transactionName" : "Thuê Xe Đạp đi Bách Khoa",
+      "typeBike" : "Xe Đạp",
+      "userId" : 1
     }
   },
   "users" : {
     "user1" : {
       "gmail" : "killteammate@gmail.com",
       "nameUser" : "DungLe",
+      "password" : "123456",
+      "totalMoney" : 560800,
+      "totalTime" : "0 giờ 37 phút",
       "userId" : 1
     }
   }

@@ -1,5 +1,5 @@
-import '../../Helper/database.dart';
-import '../../Model/bike_model.dart';
+import '../../helper/database.dart';
+import '../../model/bike_model.dart';
 
 class SliderBikeController {
   //Hàm lấy ra danh sách xe từ database

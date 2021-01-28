@@ -21,4 +21,24 @@ class BikeModel {
   final String typeBike;
   final String nameBike;
   final String state;
+
+  //Xử lý tiền thuê xe theo yêu cầu
+  int calculatorMoney(int minuteTime,String typeBike) {
+    double result;
+    if (minuteTime > 10) {
+      if (minuteTime >= 40) {
+        result = 10000 + ((minuteTime - 40) / 15 + 1) * 3000;
+      } else {
+        result = 10000;
+      }
+    } else {
+      result = 0;
+    }
+    if(typeBike == "Xe Đạp"){
+      return result.round();
+    }
+    else{
+      return (result*1.5).round();
+    }
+  }
 }

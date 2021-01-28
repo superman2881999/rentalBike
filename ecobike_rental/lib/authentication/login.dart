@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Helper/widget.dart';
-import '../View/Station/home.dart';
+import '../helper/widget.dart';
+import '../view/station/home.dart';
 
 /// Lớp này để trả về 1 instance của _LoginState
 class Login extends StatefulWidget {

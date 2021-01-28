@@ -7,9 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-import '../../Helper/widget.dart';
-import '../../Model/bike_model.dart';
 import '../../controller/rent_bike/bike_detail_controller.dart';
+import '../../helper/widget.dart';
+import '../../model/bike_model.dart';
 
 const scaleFraction = 0.3;
 const fullScale = 1;

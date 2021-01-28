@@ -7,7 +7,7 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../Helper/database.dart';
 import '../../Helper/widget.dart';
-import '../../Model/bike_model.dart';
+import '../../model/bike_model.dart';
 import '../../view/rent_bike/after_rent_bike.dart';
 import '../Notification/notification_controller.dart';
 

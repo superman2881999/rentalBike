@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 
-import '../Model/bike_model.dart';
-import '../View/Notification/notification.dart';
 import '../authentication/authentication.dart';
+import '../model/bike_model.dart';
+import '../view/notification/notification.dart';
 import '../view/rent_bike/bike_detail.dart';
 
 ///Class này để chứa những widget và hàm dùng chung cho app

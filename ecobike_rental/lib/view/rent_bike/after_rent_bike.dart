@@ -7,10 +7,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-import '../../Helper/drawer.dart';
-import '../../Helper/widget.dart';
-import '../../Model/bike_model.dart';
 import '../../controller/rent_bike/rent_bike_controller.dart';
+import '../../helper/drawer.dart';
+import '../../helper/widget.dart';
+import '../../model/bike_model.dart';
 import '../intro_app/splash_screen.dart';
 
 ///Lớp quản lý sau khi thuê xe, trả về 1 instance _RentBikeState
@@ -166,7 +166,7 @@ class _RentBikeState extends State<RentBike> {
                                 builder: (context, snapshot) {
                                   final int minuteTime = snapshot.data;
                                   paymentMoney =
-                                      rentBikeController.calculatorMoney(
+                                      widget.bikeModel.calculatorMoney(
                                           minuteTime,widget.bikeModel.typeBike);
                                   return Padding(
                                     padding: const EdgeInsets.all(6),
@@ -343,8 +343,6 @@ class _RentBikeState extends State<RentBike> {
                                                   dateRentBike:
                                                       widget.dateRentBike,
                                                   amount: paymentMoney,
-                                                  typeBike:
-                                                      widget.bikeModel.typeBike,
                                                   progressDialog:
                                                       progressDialog,
                                                   context: context,

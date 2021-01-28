@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Helper/widget.dart';
+import '../helper/widget.dart';
 
 class Register extends StatefulWidget {
   const Register(this.toggle);
@@ -69,8 +69,8 @@ class _RegisterState extends State<Register> {
                                   // controller: emailUser,
                                   style: Helper.simpleTextFieldStyle(
                                       Colors.black26, 16, FontWeight.normal),
-                                  decoration: Helper.textFieldInputDecoration(
-                                      "Email")),
+                                  decoration:
+                                      Helper.textFieldInputDecoration("Email")),
                             ),
                             Container(
                               padding: const EdgeInsets.only(
@@ -115,7 +115,7 @@ class _RegisterState extends State<Register> {
                                   Color(0xFFEF5350),
                                 ])),
                         child: Text("Register",
-                            style:Helper.simpleTextFieldStyle(
+                            style: Helper.simpleTextFieldStyle(
                                 Colors.white, 17, FontWeight.normal)),
                       ),
                       Expanded(

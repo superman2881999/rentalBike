@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
-import '../Model/notification_model.dart';
+import '../model/notification_model.dart';
 import '../view/intro_app/splash_screen.dart';
 
 //Lớp quản lý truy vấn thêm,sửa,xóa dữ liệu trên database Firebase
